@@ -2,12 +2,20 @@
   <nb-card *ngIf="games.length > 0">
     <nb-card-header>Games</nb-card-header>
     <nb-card-body>
-      <nb-list>
-        <nb-list-item *ngFor="let game of games" (click)="deleteGame(game.id)">
-          {{ game.player1 }} x {{ game.player2 }} Winner =>
-          {{ game.winner }} Date => {{ game.date }}
-        </nb-list-item>
-      </nb-list>
+      <table>
+        <tr>
+          <th>Player 1</th>
+          <th>Player 2</th>
+          <th>Winner</th>
+          <th>Date</th>
+        </tr>
+        <tr *ngFor="let game of games">
+          <td>{{ game.player1 }}</td>
+          <td>{{ game.player2 }}</td>
+          <td>{{ game.winner }}</td>
+          <td>{{ game.date }}</td>
+        </tr>
+      </table>
     </nb-card-body>
     <nb-card-footer>You have {{ games.length }} games</nb-card-footer>
   </nb-card>
