@@ -1,10 +1,14 @@
-<div class="right" *ngIf="games$">
-  <h3>Games</h3>
-  <ul>
-    <li *ngFor="let game of games$ | async" (click)="deleteGame(game.id)">
-      {{ game.player1 }} x {{ game.player2 }}
-      Winner => {{game.winner}}
-      Date => {{game.date}}
-    </li>
-  </ul>
+<div *ngIf="games$ | async as games">
+  <nb-card *ngIf="games.length > 0">
+    <nb-card-header>Games</nb-card-header>
+    <nb-card-body>
+      <nb-list>
+        <nb-list-item *ngFor="let game of games" (click)="deleteGame(game.id)">
+          {{ game.player1 }} x {{ game.player2 }} Winner =>
+          {{ game.winner }} Date => {{ game.date }}
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+    <nb-card-footer>You have {{ games.length }} games</nb-card-footer>
+  </nb-card>
 </div>
