@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { RemoveTutorial } from '../actions/tutorial.actions';
 import { IGame } from '../models/game.models';
+import { RemoveGame } from '../actions/game.actions';
 
 @Component({
   selector: 'app-read',
@@ -10,13 +10,13 @@ import { IGame } from '../models/game.models';
   styleUrls: ['./read.component.scss'],
 })
 export class ReadComponent implements OnInit {
-  tutorials$!: Observable<IGame[]>;
+  games$!: Observable<IGame[]>;
   constructor(private store: Store) {
-    this.tutorials$ = this.store.select((state) => state.tutorials.tutorials);
+    this.games$ = this.store.select((state) => state.games.games);
   }
 
-  deleteTutorial(name: string) {
-    this.store.dispatch(new RemoveTutorial(name));
+  deleteGame(id: string) {
+    this.store.dispatch(new RemoveGame(id));
   }
 
   ngOnInit(): void {}
