@@ -1,12 +1,20 @@
-<div class="left">
-  <input type="text" placeholder="player1" #player1 />
-  <input type="text" placeholder="player2" #player2 />
-  <input type="text" placeholder="winner" #winner />
-  <input type="date" placeholder="date" #date />
-
-  <button
-    (click)="addGame(player1.value, player2.value, winner.value, date.value)"
-  >
-    Add a game
-  </button>
-</div>
+<form [formGroup]="gameForm" class="addGame">
+  <input nbInput type="text" placeholder="Player 1" formControlName="player1" />
+  <input nbInput type="text" placeholder="Player 2" formControlName="player2" />
+  <nb-select placeholder="Winner" formControlName="winner" placeholder="Winner">
+    <nb-option *ngIf="gameForm.value.player1 as player1" [value]="player1">{{
+      player1
+    }}</nb-option>
+    <nb-option *ngIf="gameForm.value.player2 as player2" [value]="player2">{{
+      player2
+    }}</nb-option>
+  </nb-select>
+  <input
+    nbInput
+    placeholder="Ex: Jan 1, 2022"
+    [nbDatepicker]="datepicker"
+    #date
+  />
+  <nb-datepicker #datepicker></nb-datepicker>
+  <button (click)="addGame()" status="danger" nbButton>Add a game</button>
+</form>

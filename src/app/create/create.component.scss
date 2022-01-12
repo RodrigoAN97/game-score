@@ -1,11 +1,6 @@
-.left {
-  float: left;
-  width: calc(50% -6em);
-  padding: 3em;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
+.addGame {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
 }
