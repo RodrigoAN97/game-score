@@ -12,7 +12,7 @@ export class GameStateModel {
     games: [],
   },
 })
-export class TutorialState {
+export class GameState {
   @Selector()
   static getGames(state: GameStateModel) {
     return state.games;

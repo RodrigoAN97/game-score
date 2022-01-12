@@ -1,5 +1,5 @@
 <div class="right" *ngIf="games$">
-  <h3>Tutorials</h3>
+  <h3>Games</h3>
   <ul>
     <li *ngFor="let game of games$ | async" (click)="deleteGame(game.id)">
       {{ game.player1 }} x {{ game.player2 }}
