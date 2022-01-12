@@ -1,10 +1,10 @@
 import { RemoveTutorial } from './../actions/tutorial.actions';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { AddTutorial } from '../actions/tutorial.actions';
-import { Tutorial } from '../models/tutorials.models';
+import { IGame } from '../models/game.models';
 
 export class TutorialStateModel {
-  tutorials!: Tutorial[];
+  tutorials!: IGame[];
 }
 
 @State<TutorialStateModel>({

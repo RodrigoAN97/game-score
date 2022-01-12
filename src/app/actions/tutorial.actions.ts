@@ -1,8 +1,8 @@
-import { Tutorial } from './../models/tutorials.models';
+import { IGame } from "../models/game.models";
 
 export class AddTutorial {
   static readonly type = '[TUTORIAL] Add';
-  constructor(public payload: Tutorial) {}
+  constructor(public payload: IGame) {}
 }
 
 export class RemoveTutorial {
