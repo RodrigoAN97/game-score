@@ -1,6 +1,12 @@
 <div class="left">
-  <input type="text" placeholder="name" #name />
-  <input type="text" placeholder="url" #url />
+  <input type="text" placeholder="player1" #player1 />
+  <input type="text" placeholder="player2" #player2 />
+  <input type="text" placeholder="winner" #winner />
+  <input type="date" placeholder="date" #date />
 
-  <button (click)="addTutorial(name.value, url.value)">Add a tutorial</button>
+  <button
+    (click)="addGame(player1.value, player2.value, winner.value, date.value)"
+  >
+    Add a game
+  </button>
 </div>

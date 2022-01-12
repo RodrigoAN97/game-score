@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AddTutorial } from '../actions/tutorial.actions';
+import { uid } from 'uid';
+import { AddGame } from '../actions/game.actions';
 
 @Component({
   selector: 'app-create',
@@ -10,8 +11,16 @@ import { AddTutorial } from '../actions/tutorial.actions';
 export class CreateComponent implements OnInit {
   constructor(private store: Store) {}
 
-  addTutorial(name: string, url: string) {
-    this.store.dispatch(new AddTutorial({ name: name, url: url }));
+  addGame(player1: string, player2: string, winner: string, date: string) {
+    this.store.dispatch(
+      new AddGame({
+        player1: player1,
+        player2: player2,
+        winner: winner,
+        id: uid(),
+        date: new Date(date),
+      })
+    );
   }
 
   ngOnInit(): void {}
