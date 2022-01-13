@@ -28,6 +28,11 @@
           </td>
           <td>{{ game.winner }}</td>
           <td>{{ getDate(game.date) }}</td>
+          <td (click)="deleteGame(game.id)">
+            <button nbButton ghost status="danger">
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </td>
         </tr>
       </table>
     </nb-card-body>

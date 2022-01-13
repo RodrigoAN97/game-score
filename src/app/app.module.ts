@@ -17,6 +17,7 @@ import {
   NbSelectModule,
   NbCardModule,
   NbUserModule,
+  NbIconModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
@@ -41,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     NbCardModule,
     NbUserModule,
+    NbIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
