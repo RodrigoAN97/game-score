@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { uid } from 'uid';
 import { AddGame } from '../actions/game.actions';
@@ -10,13 +10,19 @@ import { AddGame } from '../actions/game.actions';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
-  constructor(private store: Store) {}
-  gameForm = new FormGroup({
-    player1: new FormControl(''),
-    player2: new FormControl(''),
-    winner: new FormControl(''),
-    date: new FormControl(new Date()),
-  });
+  gameForm!: FormGroup;
+  constructor(private store: Store) {
+    this.initialForm();
+  }
+
+  initialForm() {
+    this.gameForm = new FormGroup({
+      player1: new FormControl('', Validators.required),
+      player2: new FormControl('', Validators.required),
+      winner: new FormControl('', Validators.required),
+      date: new FormControl(new Date(), Validators.required),
+    });
+  }
 
   addGame() {
     this.store.dispatch(
@@ -28,6 +34,7 @@ export class CreateComponent implements OnInit {
         date: this.gameForm.value.date,
       })
     );
+    this.initialForm();
   }
 
   ngOnInit(): void {}
