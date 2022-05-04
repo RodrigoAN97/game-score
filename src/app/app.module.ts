@@ -22,18 +22,22 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireAuthModule } from "@angular/fire/compat/auth";
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp } from 'firebase/app';
+import { provideFirebaseApp } from '@angular/fire/app';
+import {
+  getFirestore,
+  provideFirestore,
+} from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc",
-  authDomain: "snooker-count.firebaseapp.com",
-  projectId: "snooker-count",
-  storageBucket: "snooker-count.appspot.com",
-  messagingSenderId: "701534059859",
-  appId: "1:701534059859:web:5175f2cf28ee45a18ef5a6"
+  apiKey: 'AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc',
+  authDomain: 'snooker-count.firebaseapp.com',
+  projectId: 'snooker-count',
+  storageBucket: 'snooker-count.appspot.com',
+  messagingSenderId: '701534059859',
+  appId: '1:701534059859:web:5175f2cf28ee45a18ef5a6',
 };
 
 @NgModule({
@@ -56,10 +60,15 @@ const firebaseConfig = {
     NbCardModule,
     NbUserModule,
     NbIconModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      return firestore;
+    }),
+    provideAuth(() => {
+      const auth = getAuth();
+      return auth;
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
