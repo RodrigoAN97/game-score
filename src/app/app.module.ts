@@ -6,7 +6,7 @@ import { CreateComponent } from './create/create.component';
 import { ReadComponent } from './read/read.component';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { GameState } from './state/game.state';
+import { GamesState } from './state/games.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
@@ -44,7 +44,7 @@ const firebaseConfig = {
   declarations: [AppComponent, CreateComponent, ReadComponent],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot([GameState]),
+    NgxsModule.forRoot([GamesState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     BrowserAnimationsModule,

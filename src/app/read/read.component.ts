@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { IGame } from '../state/game.models';
-import { RemoveGame } from '../state/game.actions';
+import { IGame } from '../state/games.models';
+import { RemoveGame } from '../state/games.actions';
 
 @Component({
   selector: 'app-read',

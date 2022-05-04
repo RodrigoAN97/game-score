@@ -1,4 +1,4 @@
-import { IGame } from "../state/game.models";
+import { IGame } from "../state/games.models";
 
 const ADD_GAME = 'ADD_GAME';
 const REMOVE_GAME = 'REMOVE_GAME';
