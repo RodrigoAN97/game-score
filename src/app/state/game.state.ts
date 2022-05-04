@@ -1,12 +1,8 @@
 import { FirebaseService } from './../services/firebase.service';
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { IGame } from './game.models';
+import { Action, State, StateContext } from '@ngxs/store';
+import { GameStateModel } from './game.models';
 import { AddGame, RemoveGame } from './game.actions';
-
-export class GameStateModel {
-  games!: IGame[];
-}
 
 @State<GameStateModel>({
   name: 'games',
@@ -18,11 +14,6 @@ export class GameStateModel {
 @Injectable()
 export class GameState {
   constructor(private firebaseService: FirebaseService) {}
-
-  @Selector()
-  static getGames(state: GameStateModel) {
-    return state.games;
-  }
 
   @Action(AddGame)
   async add(

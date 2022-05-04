@@ -5,3 +5,7 @@ export interface IGame {
   id: string;
   date: Date;
 }
+
+export class GameStateModel {
+  games!: IGame[];
+}
