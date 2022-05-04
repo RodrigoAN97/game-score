@@ -2,7 +2,7 @@ import { FirebaseService } from './../services/firebase.service';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { AddGame, RemoveGame } from '../actions/game.actions';
-import { IGame } from '../models/game.models';
+import { IGame } from './game.models';
 
 export class GameStateModel {
   games!: IGame[];

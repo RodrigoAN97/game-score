@@ -1,4 +1,5 @@
-import { IGame } from '../models/game.models';
+import { IGame } from "../state/game.models";
+
 const ADD_GAME = 'ADD_GAME';
 const REMOVE_GAME = 'REMOVE_GAME';
 export class AddGame {
