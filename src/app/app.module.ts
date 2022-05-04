@@ -22,6 +22,19 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc",
+  authDomain: "snooker-count.firebaseapp.com",
+  projectId: "snooker-count",
+  storageBucket: "snooker-count.appspot.com",
+  messagingSenderId: "701534059859",
+  appId: "1:701534059859:web:5175f2cf28ee45a18ef5a6"
+};
 
 @NgModule({
   declarations: [AppComponent, CreateComponent, ReadComponent],
@@ -43,6 +56,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbCardModule,
     NbUserModule,
     NbIconModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent],
