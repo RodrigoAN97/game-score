@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { uid } from 'uid';
-import { AddGame } from '../actions/game.actions';
+import { AddGame } from '../state/game.actions';
 
 @Component({
   selector: 'app-create',
