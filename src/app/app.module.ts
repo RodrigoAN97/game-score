@@ -27,6 +27,7 @@ import {
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { ScoreComponent } from './score/score.component';
+import { ScorePipe } from './score.pipe';
 
 
 const firebaseConfig = {
@@ -39,7 +40,7 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, CreateComponent, ReadComponent, AddPlayerComponent, ScoreComponent],
+  declarations: [AppComponent, CreateComponent, ReadComponent, AddPlayerComponent, ScoreComponent, ScorePipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
