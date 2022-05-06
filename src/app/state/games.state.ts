@@ -1,7 +1,7 @@
 import { FirebaseService } from './../services/firebase.service';
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
-import { AddGame, RemoveGame } from './games.actions';
+import { AddGame, RemoveGame, GetGames } from './games.actions';
 import { GameStateModel } from './games.models';
 
 @State<GameStateModel>({
@@ -16,17 +16,17 @@ export class GamesState {
   constructor(private firebaseService: FirebaseService) {}
 
   @Action(AddGame)
-  async add(
+  async AddGame(
     { getState, patchState }: StateContext<GameStateModel>,
     { payload }: AddGame
   ) {
-    await this.firebaseService.addDoc('games', payload);
+    await this.firebaseService.addDocument('games', payload);
     const state = getState();
     patchState({ games: [...state.games, payload] });
   }
 
   @Action(RemoveGame)
-  remove(
+  RemoveGame(
     { getState, patchState }: StateContext<GameStateModel>,
     { payload }: RemoveGame
   ) {
