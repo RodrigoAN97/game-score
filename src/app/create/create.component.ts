@@ -34,8 +34,9 @@ export class CreateComponent implements OnInit {
 
   addGame() {
     const docId = uid(21);
+    const players = [this.gameForm.value.player1, this.gameForm.value.player2].sort((a,b) => a < b ? -1 : 1);
     const docData :IGame = {
-      players: [this.gameForm.value.player1, this.gameForm.value.player2],
+      players,
       winner: this.gameForm.value.winner,
       id: docId,
       date: this.gameForm.value.date,
