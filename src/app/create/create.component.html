@@ -1,12 +1,14 @@
 <nb-card>
   <nb-card-body>
     <form [formGroup]="gameForm" class="addGame" (ngSubmit)="addGame()">
-      <nb-select placeholder="Player 1" formControlName="player1" *ngIf="players$ | async as players">
-        <nb-option *ngFor="let item of players" [value]="item.player">{{item.player}}</nb-option>
-      </nb-select>
-      <nb-select placeholder="Player 1" formControlName="player2" *ngIf="players$ | async as players">
-        <nb-option *ngFor="let item of players" [value]="item.player">{{item.player}}</nb-option>
-      </nb-select>
+      <ng-container *ngIf="players$ | async as players">
+        <nb-select placeholder="Player 1" formControlName="player1">
+          <nb-option *ngFor="let item of players" [value]="item.player">{{item.player}}</nb-option>
+        </nb-select>
+        <nb-select placeholder="Player 1" formControlName="player2">
+          <nb-option *ngFor="let item of players" [value]="item.player">{{item.player}}</nb-option>
+        </nb-select>
+      </ng-container>
       <nb-select
         placeholder="Winner"
         formControlName="winner"
