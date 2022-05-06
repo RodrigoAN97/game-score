@@ -1,8 +1,7 @@
+import { FirebaseService } from './../services/firebase.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngxs/store';
 import { uid } from 'uid';
-import { AddGame } from '../state/games.actions';
 
 @Component({
   selector: 'app-create',
@@ -11,7 +10,7 @@ import { AddGame } from '../state/games.actions';
 })
 export class CreateComponent implements OnInit {
   gameForm!: FormGroup;
-  constructor(private store: Store) {
+  constructor(private firebaseService: FirebaseService) {
     this.initialForm();
   }
 
@@ -25,15 +24,13 @@ export class CreateComponent implements OnInit {
   }
 
   addGame() {
-    this.store.dispatch(
-      new AddGame({
-        player1: this.gameForm.value.player1,
-        player2: this.gameForm.value.player2,
-        winner: this.gameForm.value.winner,
-        id: uid(),
-        date: this.gameForm.value.date,
-      })
-    );
+    this.firebaseService.addDocument('games', {
+      player1: this.gameForm.value.player1,
+      player2: this.gameForm.value.player2,
+      winner: this.gameForm.value.winner,
+      id: uid(),
+      date: this.gameForm.value.date,
+    });
     this.initialForm();
   }
 

@@ -1,8 +1,14 @@
+import { FirebaseService } from './../services/firebase.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { IGame } from '../state/games.models';
-import { RemoveGame, GetGames } from '../state/games.actions';
+
+export interface IGame {
+  player1: string;
+  player2: string;
+  winner: string;
+  id: string;
+  date: any;
+}
 
 @Component({
   selector: 'app-read',
@@ -11,15 +17,13 @@ import { RemoveGame, GetGames } from '../state/games.actions';
 })
 export class ReadComponent implements OnInit {
   games$!: Observable<IGame[]>;
-  constructor(private store: Store) {
-    this.store.dispatch(new GetGames());
-    this.games$ = this.store.select((state) => state.games.games);
+  constructor(private firebaseService: FirebaseService) {
+    this.games$ = this.firebaseService.getCollection('games');
   }
 
   deleteGame(id: string) {
-    this.store.dispatch(new RemoveGame(id));
+    this.firebaseService.deleteDocument('games', id);
   }
-
 
   ngOnInit(): void {}
 }

@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { collectionData, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,12 @@ export class FirebaseService {
     await addDoc(collection(this.firestore, collectionName), docData);
   }
 
-  async getCollection (collectionName:string): Promise<any[]> {
-    const querySnapshot = await getDocs(collection(this.firestore, collectionName));
-    return querySnapshot.docChanges().map(item => item.doc.data());
+  async deleteDocument(collectionName: string, docId: string) {
+    await deleteDoc(doc(this.firestore, collectionName, docId));
+  }
+
+  getCollection (collectionName:string): Observable<any[]> {
+    const col = collection(this.firestore, collectionName);
+    return collectionData(col);
   }
 }
