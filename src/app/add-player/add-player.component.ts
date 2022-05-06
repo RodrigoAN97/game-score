@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from './../services/firebase.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-add-player',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-player.component.scss']
 })
 export class AddPlayerComponent implements OnInit {
+  @ViewChild("playerName") playerName!: ElementRef;
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
   }
 
+  savePlayer() {
+    const player = this.playerName.nativeElement.value as string;
+    this.firebaseService.setDocument('players', player, {player, createdAt: new Date()});
+  }
 }
