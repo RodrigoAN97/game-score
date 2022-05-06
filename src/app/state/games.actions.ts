@@ -1,7 +1,10 @@
 import { IGame } from "../state/games.models";
 
-const ADD_GAME = 'ADD_GAME';
-const REMOVE_GAME = 'REMOVE_GAME';
+export class GetGames {
+  static readonly type = 'GET_GAMES';
+  constructor() {}
+}
+
 export class AddGame {
   static readonly type = ADD_GAME;
   constructor(public payload: IGame) {}

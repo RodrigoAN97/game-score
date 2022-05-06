@@ -3,7 +3,7 @@ export interface IGame {
   player2: string;
   winner: string;
   id: string;
-  date: Date;
+  date: any;
 }
 
 export class GameStateModel {

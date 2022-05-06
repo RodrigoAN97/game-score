@@ -34,4 +34,10 @@ export class GamesState {
       games: getState().games.filter((game) => game.id !== payload),
     });
   }
+
+  @Action(GetGames)
+  async GetGames({ patchState }: StateContext<GameStateModel>) {
+    const games = await this.firebaseService.getCollection('games');
+    patchState({games});
+  }
 }

@@ -25,7 +25,7 @@
             </nb-user>
           </td>
           <td>{{ game.winner }}</td>
-          <td>{{ getDate(game.date) }}</td>
+          <td>{{ game.date.toDate() | date }}</td>
           <td (click)="deleteGame(game.id)">
             <button nbButton ghost status="danger">
               <nb-icon icon="close-outline"></nb-icon>
