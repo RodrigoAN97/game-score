@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { Observable } from 'rxjs';
 
-interface IPlayer {
+export interface IPlayer {
   player: string;
   createdAt: any;
 }

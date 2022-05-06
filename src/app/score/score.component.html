@@ -1,0 +1,7 @@
+<ng-container *ngIf="players$ | async as players">
+	<ng-container *ngFor="let x of players">
+		<ng-container *ngFor="let y of players">
+			<div *ngIf="x.player !== y.player">{{x.player}} {{y.player}}</div>
+		</ng-container>
+	</ng-container>
+</ng-container>
