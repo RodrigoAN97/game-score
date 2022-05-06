@@ -1,3 +1,4 @@
+import { IGame } from './../read/read.component';
 import { FirebaseService } from './../services/firebase.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -33,9 +34,8 @@ export class CreateComponent implements OnInit {
 
   addGame() {
     const docId = uid(21);
-    const docData = {
-      player1: this.gameForm.value.player1,
-      player2: this.gameForm.value.player2,
+    const docData :IGame = {
+      players: [this.gameForm.value.player1, this.gameForm.value.player2],
       winner: this.gameForm.value.winner,
       id: docId,
       date: this.gameForm.value.date,

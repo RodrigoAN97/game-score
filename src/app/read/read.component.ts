@@ -3,8 +3,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 export interface IGame {
-  player1: string;
-  player2: string;
+  players: string[];
   winner: string;
   id: string;
   date: any;
