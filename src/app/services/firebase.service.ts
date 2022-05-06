@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { collectionData, Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
 
 
 @Injectable({
@@ -11,8 +11,9 @@ export class FirebaseService {
 
   constructor(private firestore: Firestore) { }
 
-  async addDocument(collectionName:string, docData:any) {
-    await addDoc(collection(this.firestore, collectionName), docData);
+  async setDocument(collectionName:string, docId:string, docData:any) {
+    const collectionRef = collection(this.firestore, collectionName);
+    await setDoc(doc(collectionRef, docId), docData);  
   }
 
   async deleteDocument(collectionName: string, docId: string) {

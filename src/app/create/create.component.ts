@@ -24,13 +24,15 @@ export class CreateComponent implements OnInit {
   }
 
   addGame() {
-    this.firebaseService.addDocument('games', {
+    const docId = uid(21);
+    const docData = {
       player1: this.gameForm.value.player1,
       player2: this.gameForm.value.player2,
       winner: this.gameForm.value.winner,
-      id: uid(),
+      id: docId,
       date: this.gameForm.value.date,
-    });
+    };
+    this.firebaseService.setDocument('games', docId, docData);
     this.initialForm();
   }
 
