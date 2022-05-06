@@ -17,5 +17,6 @@ export class AddPlayerComponent implements OnInit {
   savePlayer() {
     const player = this.playerName.nativeElement.value as string;
     this.firebaseService.setDocument('players', player, {player, createdAt: new Date()});
+    this.playerName.nativeElement.value = '';
   }
 }
