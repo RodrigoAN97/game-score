@@ -2,6 +2,12 @@ import { FirebaseService } from './../services/firebase.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
+import { Observable } from 'rxjs';
+
+interface IPlayer {
+  player: string;
+  createdAt: any;
+}
 
 @Component({
   selector: 'app-create',
@@ -10,8 +16,10 @@ import { uid } from 'uid';
 })
 export class CreateComponent implements OnInit {
   gameForm!: FormGroup;
+  players$!: Observable<IPlayer[]>;
   constructor(private firebaseService: FirebaseService) {
     this.initialForm();
+    this.players$ = this.firebaseService.getCollection('players');
   }
 
   initialForm() {
