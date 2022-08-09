@@ -1,0 +1,21 @@
+nb-card {
+  max-width: 555px;
+  margin: auto;
+}
+
+nb-card-header,
+nb-card-footer {
+  text-align: center;
+}
+
+table {
+  text-align: center;
+  overflow: hidden;
+  border: solid #ccc 1px;
+  border-radius: 25px;
+}
+
+table th,
+table td {
+  padding: 0.5rem;
+}

@@ -1,0 +1,45 @@
+<nb-card>
+  <nb-card-body>
+    <form [formGroup]="gameForm" class="addGame" (ngSubmit)="addGame()">
+      <ng-container *ngIf="players$ | async as players">
+        <nb-select placeholder="Player 1" formControlName="player1">
+          <nb-option *ngFor="let item of players" [value]="item.player">{{item.player}}</nb-option>
+        </nb-select>
+        <nb-select placeholder="Player 1" formControlName="player2">
+          <nb-option *ngFor="let item of players" [value]="item.player">{{item.player}}</nb-option>
+        </nb-select>
+      </ng-container>
+      <nb-select
+        placeholder="Winner"
+        formControlName="winner"
+      >
+        <nb-option
+          *ngIf="gameForm.value.player1 as player1"
+          [value]="player1"
+          >{{ player1 }}</nb-option
+        >
+        <nb-option
+          *ngIf="gameForm.value.player2 as player2"
+          [value]="player2"
+          >{{ player2 }}</nb-option
+        >
+      </nb-select>
+      <input
+        nbInput
+        placeholder="Ex: Jan 1, 2022"
+        [nbDatepicker]="datepicker"
+        #date
+        formControlName="date"
+      />
+      <nb-datepicker #datepicker></nb-datepicker>
+      <button
+        [disabled]="!gameForm.valid"
+        type="submit"
+        status="danger"
+        nbButton
+      >
+        Add a game
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>

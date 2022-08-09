@@ -1,0 +1,39 @@
+<div *ngIf="games$ | async as games">
+  <nb-card *ngIf="games.length > 0">
+    <nb-card-header>Games</nb-card-header>
+    <nb-card-body>
+      <table>
+        <tr>
+          <th>Player 1</th>
+          <th>Player 2</th>
+          <th>Winner</th>
+          <th>Date</th>
+        </tr>
+        <tr *ngFor="let game of games">
+          <td>
+            <nb-user
+              size="large"
+              [name]="game.players[0]"
+            >
+            </nb-user>
+          </td>
+          <td>
+            <nb-user
+              size="large"
+              [name]="game.players[1]"
+            >
+            </nb-user>
+          </td>
+          <td>{{ game.winner }}</td>
+          <td>{{ game.date.toDate() | date }}</td>
+          <td (click)="deleteGame(game.id)">
+            <button nbButton ghost status="danger">
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </nb-card-body>
+    <nb-card-footer>You have {{ games.length }} games</nb-card-footer>
+  </nb-card>
+</div>
