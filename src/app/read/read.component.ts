@@ -21,7 +21,7 @@ export class ReadComponent implements OnInit {
   }
 
   deleteGame(id: string) {
-    //TODO: Make this confirm popup a customized popup and give a toaster message at the end
+    //TODO: Make this confirm popup a customized popup and give a toaster message at the endw
     if(confirm('Are you sure you want to delete this game')) {
       this.firebaseService.deleteDocument('games', id);
     }
