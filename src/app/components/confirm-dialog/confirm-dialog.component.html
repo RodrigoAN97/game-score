@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>{{title}}</nb-card-header>
+  <nb-card-body>
+    {{message}}
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="warning" id="no" (click)="close(false)">No</button>
+    <button nbButton status="danger" (click)="close(true)">Yes</button>
+  </nb-card-footer>
+</nb-card>

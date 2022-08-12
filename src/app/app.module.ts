@@ -14,6 +14,7 @@ import {
   NbCardModule,
   NbUserModule,
   NbIconModule,
+  NbDialogModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { ScoreComponent } from './score/score.component';
 import { ScorePipe } from './score.pipe';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 const firebaseConfig = {
@@ -40,7 +42,7 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, CreateComponent, ReadComponent, AddPlayerComponent, ScoreComponent, ScorePipe],
+  declarations: [AppComponent, CreateComponent, ReadComponent, AddPlayerComponent, ScoreComponent, ScorePipe, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -56,6 +58,8 @@ const firebaseConfig = {
     NbCardModule,
     NbUserModule,
     NbIconModule,
+    NbDialogModule.forRoot(),
+    NbCardModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => {
       const firestore = getFirestore();
