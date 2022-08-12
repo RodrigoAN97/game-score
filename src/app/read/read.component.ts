@@ -1,6 +1,6 @@
 import { NbDialogService } from '@nebular/theme';
 import { FirebaseService } from './../services/firebase.service';
-import { lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom, map, Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
@@ -23,7 +23,8 @@ export class ReadComponent implements OnInit {
     private firebaseService: FirebaseService,
     private dialogService: NbDialogService
   ) {
-    this.games$ = this.firebaseService.getCollection('games');
+    this.games$ = this.firebaseService.getCollection('games')
+      .pipe(map((games:IGame[]) => games.sort((a,b) => b.date - a.date)));
   }
 
   async deleteGame(id: string) {
