@@ -15,6 +15,7 @@ import {
   NbUserModule,
   NbIconModule,
   NbDialogModule,
+  NbTabsetModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
@@ -64,6 +65,7 @@ const firebaseConfig = {
     NbIconModule,
     NbDialogModule.forRoot(),
     NbCardModule,
+    NbTabsetModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => {
       const firestore = getFirestore();

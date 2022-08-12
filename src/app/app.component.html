@@ -1,14 +1,26 @@
 <nb-layout>
   <nb-layout-header fixed>
     <h4>Game Score</h4>
-    <button status="danger" nbButton (click)="addPlayer=!addPlayer">Add player</button>
+    <button status="danger" nbButton (click)="addPlayer = !addPlayer">
+      Add player
+    </button>
   </nb-layout-header>
 
   <nb-layout-column>
-    <app-add-player *ngIf="addPlayer"></app-add-player>
-    <app-create></app-create>
-    <app-score></app-score>
-    <app-read></app-read>
+    <nb-tabset>
+      <nb-tab tabTitle="Add Player">
+        <app-add-player></app-add-player>
+      </nb-tab>
+      <nb-tab tabTitle="Create Game">
+        <app-create></app-create>
+      </nb-tab>
+      <nb-tab tabTitle="Score">
+        <app-score></app-score>
+      </nb-tab>
+      <nb-tab tabTitle="History">
+        <app-read></app-read>
+      </nb-tab>
+    </nb-tabset>
   </nb-layout-column>
 
   <nb-layout-footer fixed> Beat your opponent! </nb-layout-footer>

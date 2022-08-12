@@ -1,9 +1,17 @@
-nb-layout-header {
-	button {
-		margin-left: auto;
-	}
-}
+:host {
+  nb-layout-header {
+    button {
+      margin-left: auto;
+    }
+  }
 
-nb-layout-column {
-	width: 100hw;
+  nb-layout-column {
+    width: 100hw;
+  }
+  ::ng-deep {
+    .tabset {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
 }
