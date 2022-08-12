@@ -1,7 +1,7 @@
 import { NbDialogService } from '@nebular/theme';
 import { FirebaseService } from './../services/firebase.service';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
 export interface IGame {
@@ -15,6 +15,7 @@ export interface IGame {
   selector: 'app-read',
   templateUrl: './read.component.html',
   styleUrls: ['./read.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadComponent implements OnInit {
   games$!: Observable<IGame[]>;
@@ -35,7 +36,7 @@ export class ReadComponent implements OnInit {
         closeOnBackdropClick: false,
       })
       .onClose.toPromise();
-    if(confirm) {
+    if (confirm) {
       this.firebaseService.deleteDocument('games', id);
     }
   }

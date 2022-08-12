@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPlayer } from '../create/create.component';
 import { IGame } from '../read/read.component';
@@ -7,7 +7,8 @@ import { FirebaseService } from '../services/firebase.service';
 @Component({
   selector: 'app-score',
   templateUrl: './score.component.html',
-  styleUrls: ['./score.component.scss']
+  styleUrls: ['./score.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScoreComponent implements OnInit {
   games$!: Observable<IGame[]>;

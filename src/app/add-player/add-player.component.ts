@@ -1,10 +1,11 @@
 import { FirebaseService } from './../services/firebase.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-add-player',
   templateUrl: './add-player.component.html',
-  styleUrls: ['./add-player.component.scss']
+  styleUrls: ['./add-player.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlayerComponent implements OnInit {
   @ViewChild("playerName") playerName!: ElementRef;
