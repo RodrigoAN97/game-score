@@ -1,6 +1,6 @@
 import { NbDialogService } from '@nebular/theme';
 import { FirebaseService } from './../services/firebase.service';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
@@ -27,7 +27,7 @@ export class ReadComponent implements OnInit {
   }
 
   async deleteGame(id: string) {
-    const confirm = await this.dialogService
+    const confirm = await lastValueFrom(this.dialogService
       .open(ConfirmDialogComponent, {
         context: {
           title: 'Delete',
@@ -35,7 +35,7 @@ export class ReadComponent implements OnInit {
         },
         closeOnBackdropClick: false,
       })
-      .onClose.toPromise();
+      .onClose);
     if (confirm) {
       this.firebaseService.deleteDocument('games', id);
     }
