@@ -21,16 +21,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp } from 'firebase/app';
 import { provideFirebaseApp } from '@angular/fire/app';
-import {
-  getFirestore,
-  provideFirestore,
-} from '@angular/fire/firestore';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { ScoreComponent } from './score/score.component';
 import { ScorePipe } from './score.pipe';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc',
@@ -42,7 +38,15 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, CreateComponent, ReadComponent, AddPlayerComponent, ScoreComponent, ScorePipe, ConfirmDialogComponent],
+  declarations: [
+    AppComponent,
+    CreateComponent,
+    ReadComponent,
+    AddPlayerComponent,
+    ScoreComponent,
+    ScorePipe,
+    ConfirmDialogComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
