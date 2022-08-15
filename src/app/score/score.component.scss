@@ -11,22 +11,12 @@ nb-card-footer {
 table {
   text-align: center;
   overflow: hidden;
-  border: solid #ccc 1px;
-  border-radius: 25px;
+  border-collapse: collapse;
   width: 100%;
 }
 
 table td {
-  padding: 0.5rem;
-  border-bottom: 1px solid #ccc;
-}
-
-table .lastChild {
-    border-bottom: none;
-}
-
-#firstPlayer {
-  border-right: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 table td {
