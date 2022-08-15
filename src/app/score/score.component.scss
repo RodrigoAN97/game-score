@@ -1,0 +1,40 @@
+nb-card {
+  max-width: 555px;
+  margin: auto;
+}
+
+nb-card-header,
+nb-card-footer {
+  text-align: center;
+}
+
+table {
+  text-align: center;
+  overflow: hidden;
+  border: solid #ccc 1px;
+  border-radius: 25px;
+  width: 100%;
+}
+
+table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+table .lastChild {
+    border-bottom: none;
+}
+
+#firstPlayer {
+  border-right: 1px solid #ccc;
+}
+
+table td {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+table tr {
+  display: flex;
+}

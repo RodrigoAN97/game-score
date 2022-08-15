@@ -19,6 +19,11 @@ export class ScoreComponent implements OnInit {
     this.players$ = this.firebaseService.getCollection('players');
   }
 
+  values(s:any) {
+    // return Object.keys(s);
+    return s
+  }
+
   ngOnInit(): void {
   }
 

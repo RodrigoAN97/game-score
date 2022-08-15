@@ -1,3 +1,20 @@
-<ng-container *ngIf="games$ | async | score as score">
-	{{ score | json }}
-</ng-container>
+<nb-card>
+  <nb-card-header>Battles</nb-card-header>
+  <nb-card-body>
+    <table *ngIf="games$ | async | score as score">
+      <tr *ngFor="let s of score | keyvalue; let i = index">
+        <td
+          id="firstPlayer"
+          [ngClass]="i === s.value.length ? 'lastChild' : ''"
+        >
+          <p>{{ s.key.split(",")[0] }}</p>
+          <p>{{ s.value[0] }}</p>
+        </td>
+        <td [ngClass]="i === s.value.length ? 'lastChild' : ''">
+          <p>{{ s.key.split(",")[1] }}</p>
+          <p>{{ s.value[1] }}</p>
+        </td>
+      </tr>
+    </table>
+  </nb-card-body>
+</nb-card>
