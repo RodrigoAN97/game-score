@@ -15,3 +15,7 @@
     }
   }
 }
+
+::ng-deep nb-tab.content-active {
+  padding: 0 !important;
+}
