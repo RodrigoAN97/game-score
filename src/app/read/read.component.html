@@ -7,6 +7,7 @@
           <th>Player 1</th>
           <th>Player 2</th>
           <th>Date</th>
+          <th></th>
         </tr>
         <tr *ngFor="let game of games">
           <td [ngClass]="game.players[0] === game.winner ? 'winner' : 'looser'">
@@ -16,7 +17,7 @@
             {{ game.players[1] }}
           </td>
           <td>{{ game.date.toDate() | date }}</td>
-          <td (click)="deleteGame(game.id)">
+          <td (click)="deleteGame(game.id)" class="deleteGame">
             <button nbButton ghost status="danger">
               <nb-icon icon="close-outline"></nb-icon>
             </button>

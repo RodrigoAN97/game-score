@@ -11,13 +11,14 @@ nb-card-footer {
 table {
   text-align: center;
   overflow: hidden;
-  border: solid #ccc 1px;
-  border-radius: 25px;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 table th,
 table td {
   padding: 0.5rem;
+  border: solid #ccc 1px;
 }
 
 .winner {
