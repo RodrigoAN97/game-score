@@ -4,6 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { Observable } from 'rxjs';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 
 export interface IPlayer {
   player: string;
@@ -19,7 +20,12 @@ export interface IPlayer {
 export class CreateComponent implements OnInit {
   gameForm!: FormGroup;
   players$!: Observable<IPlayer[]>;
-  constructor(private firebaseService: FirebaseService) {
+  physicalPositions = NbGlobalPhysicalPosition;
+
+  constructor(
+    private firebaseService: FirebaseService,
+    private toastrService: NbToastrService
+  ) {
     this.initialForm();
     this.players$ = this.firebaseService.getCollection('players');
   }
@@ -51,6 +57,10 @@ export class CreateComponent implements OnInit {
       date: this.gameForm.value.date,
     };
     this.firebaseService.setDocument('games', docId, docData);
+    this.toastrService.show('Success', 'Game was created sucessfully!', {
+      position: this.physicalPositions.TOP_RIGHT,
+      status: 'success'
+    });
     this.initialForm();
   }
 
