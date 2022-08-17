@@ -1,6 +1,13 @@
 <nb-layout>
   <nb-layout-header fixed>
     <h4>Game Score</h4>
+    <button nbButton ghost status="danger" (click)="toggleTheme()">
+      <nb-icon
+        [icon]="
+          themeService.currentTheme === 'dark' ? 'sun-outline' : 'moon-outline'
+        "
+      ></nb-icon>
+    </button>
   </nb-layout-header>
 
   <nb-layout-column>

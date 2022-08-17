@@ -36,12 +36,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@nebular/theme/styles/prebuilt/dark.css",
+              "./node_modules/@nebular/theme/styles/prebuilt/default.css",
+              "./node_modules/@nebular/theme/styles/prebuilt/cosmic.css",
+              "./node_modules/@nebular/theme/styles/prebuilt/corporate.css",
               "src/styles.scss"
             ],
             "scripts": []
