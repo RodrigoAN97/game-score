@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 nb-card {
   max-width: 555px;
   margin: auto;
@@ -18,13 +20,13 @@ table {
 table th,
 table td {
   padding: 0.5rem;
-  border: solid #ccc 1px;
+  border: solid $gray 1px;
 }
 
 .winner {
-  color: green;
+  color: $green;
 }
 
 .looser {
-  color: #bd0101;
+  color: $red;
 }

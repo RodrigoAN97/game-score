@@ -1,3 +1,5 @@
+@import '../../styles.scss';
+
 nb-card {
   max-width: 555px;
   margin: auto;
@@ -16,7 +18,7 @@ table {
 }
 
 table td {
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
 }
 
 table td {
