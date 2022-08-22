@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LoginRoutingModule } from './login-routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   NbButtonModule,
@@ -36,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    LoginRoutingModule,
+    AuthRoutingModule,
     NbLayoutModule,
     NbEvaIconsModule,
     NbInputModule,
@@ -54,4 +54,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
 })
 
-export class LoginModule {}
+export class AuthModule {}
