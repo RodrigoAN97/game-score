@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-header fixed>
-    <h4>Game Score</h4>
+    <h4>MyScores</h4>
     <button nbButton ghost status="danger" (click)="toggleTheme()">
       <nb-icon
         [icon]="
@@ -11,21 +11,10 @@
   </nb-layout-header>
 
   <nb-layout-column>
-    <nb-tabset>
-      <nb-tab tabTitle="Add Player">
-        <app-add-player></app-add-player>
-      </nb-tab>
-      <nb-tab tabTitle="Create Game">
-        <app-create></app-create>
-      </nb-tab>
-      <nb-tab tabTitle="Score">
-        <app-score></app-score>
-      </nb-tab>
-      <nb-tab tabTitle="History">
-        <app-read></app-read>
-      </nb-tab>
-    </nb-tabset>
+    <router-outlet></router-outlet>
   </nb-layout-column>
 
-  <nb-layout-footer fixed> Beat your opponent! </nb-layout-footer>
+  <nb-layout-footer fixed>
+    {{ "Beat your opponent" | translate }}!</nb-layout-footer
+  >
 </nb-layout>
