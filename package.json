@@ -24,6 +24,8 @@
     "@angular/router": "~13.3.11",
     "@nebular/eva-icons": "8.0.0",
     "@nebular/theme": "^8.0.0",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "@ngxs/devtools-plugin": "^3.7.3",
     "@ngxs/logger-plugin": "^3.7.3",
     "@ngxs/store": "^3.7.3",

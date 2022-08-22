@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { CreateComponent } from './create/create.component';
-import { ReadComponent } from './read/read.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
@@ -25,10 +23,10 @@ import { initializeApp } from 'firebase/app';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { AddPlayerComponent } from './add-player/add-player.component';
-import { ScoreComponent } from './score/score.component';
-import { ScorePipe } from './score.pipe';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc',
@@ -39,16 +37,12 @@ const firebaseConfig = {
   appId: '1:701534059859:web:5175f2cf28ee45a18ef5a6',
 };
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    CreateComponent,
-    ReadComponent,
-    AddPlayerComponent,
-    ScoreComponent,
-    ScorePipe,
-    ConfirmDialogComponent,
-  ],
+  declarations: [AppComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -68,6 +62,14 @@ const firebaseConfig = {
     NbToastrModule.forRoot(),
     NbCardModule,
     NbTabsetModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => {
       const firestore = getFirestore();
