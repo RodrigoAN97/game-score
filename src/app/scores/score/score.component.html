@@ -1,5 +1,5 @@
 <nb-card>
-  <nb-card-header>Battles</nb-card-header>
+  <nb-card-header>{{ "Battles" | translate }}</nb-card-header>
   <nb-card-body>
     <table *ngIf="games$ | async | score as score">
       <tr *ngFor="let s of score | keyvalue; let i = index">

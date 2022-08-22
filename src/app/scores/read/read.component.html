@@ -1,12 +1,12 @@
 <div *ngIf="games$ | async as games">
   <nb-card *ngIf="games.length > 0">
-    <nb-card-header>Games</nb-card-header>
+    <nb-card-header>{{ "Games" | translate }}</nb-card-header>
     <nb-card-body>
       <table>
         <tr>
-          <th>Player 1</th>
-          <th>Player 2</th>
-          <th>Date</th>
+          <th>{{ "Player" | translate }} 1</th>
+          <th>{{ "Player" | translate }} 2</th>
+          <th>{{ "Date" | translate }}</th>
           <th></th>
         </tr>
         <tr *ngFor="let game of games">
@@ -25,6 +25,9 @@
         </tr>
       </table>
     </nb-card-body>
-    <nb-card-footer>You have {{ games.length }} games</nb-card-footer>
+    <nb-card-footer>
+      {{ "You have" | translate }} {{ games.length }}
+      {{ "games" | translate }}
+    </nb-card-footer>
   </nb-card>
 </div>

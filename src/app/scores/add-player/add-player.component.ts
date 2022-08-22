@@ -1,4 +1,4 @@
-import { FirebaseService } from './../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({

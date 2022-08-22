@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-body>
+    <input
+      #playerName
+      nbInput
+      type="text"
+      placeholder="{{ 'Player Name' | translate }}"
+    />
+    <button status="danger" nbButton (click)="savePlayer()">
+      {{ "Add" | translate }}
+    </button>
+  </nb-card-body>
+</nb-card>

@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@import "../../../variables.scss";
 
 nb-card {
   max-width: 555px;
@@ -17,16 +17,16 @@ table {
   width: 100%;
 }
 
+table th,
 table td {
-  border: 1px solid $gray;
+  padding: 0.5rem;
+  border: solid $gray 1px;
 }
 
-table td {
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
+.winner {
+  color: $green;
 }
 
-table tr {
-  display: flex;
+.looser {
+  color: $red;
 }

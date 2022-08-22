@@ -1,5 +1,5 @@
-import { IGame } from './../read/read.component';
-import { FirebaseService } from './../services/firebase.service';
+import { IGame } from '../read/read.component';
+import { FirebaseService } from '../../services/firebase.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';

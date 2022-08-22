@@ -1,8 +1,8 @@
 import { NbDialogService } from '@nebular/theme';
-import { FirebaseService } from './../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 export interface IGame {
   players: string[];
