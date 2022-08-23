@@ -1,5 +1,5 @@
 import { NbDialogService } from '@nebular/theme';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirestoreService } from '../../services/firestore.service';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -20,25 +20,26 @@ export interface IGame {
 export class ReadComponent implements OnInit {
   games$!: Observable<IGame[]>;
   constructor(
-    private firebaseService: FirebaseService,
+    private firestoreService: FirestoreService,
     private dialogService: NbDialogService
   ) {
-    this.games$ = this.firebaseService.getCollection('games')
-      .pipe(map((games:IGame[]) => games.sort((a,b) => b.date - a.date)));
+    this.games$ = this.firestoreService
+      .getCollection('games')
+      .pipe(map((games: IGame[]) => games.sort((a, b) => b.date - a.date)));
   }
 
   async deleteGame(id: string) {
-    const confirm = await lastValueFrom(this.dialogService
-      .open(ConfirmDialogComponent, {
+    const confirm = await lastValueFrom(
+      this.dialogService.open(ConfirmDialogComponent, {
         context: {
           title: 'Delete',
           message: 'Are you sure you wat to delete this game?',
         },
         closeOnBackdropClick: false,
-      })
-      .onClose);
+      }).onClose
+    );
     if (confirm) {
-      this.firebaseService.deleteDocument('games', id);
+      this.firestoreService.deleteDocument('games', id);
     }
   }
 

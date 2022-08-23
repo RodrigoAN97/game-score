@@ -1,4 +1,4 @@
-import { FirebaseService } from '../../services/firebase.service';
+import { FirestoreService } from '../../services/firestore.service';
 import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -10,14 +10,14 @@ import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } fro
 export class AddPlayerComponent implements OnInit {
   @ViewChild("playerName") playerName!: ElementRef;
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firestoreService: FirestoreService) { }
 
   ngOnInit(): void {
   }
 
   savePlayer() {
     const player = this.playerName.nativeElement.value as string;
-    this.firebaseService.setDocument('players', player, {player, createdAt: new Date()});
+    this.firestoreService.setDocument('players', player, {player, createdAt: new Date()});
     this.playerName.nativeElement.value = '';
   }
 }

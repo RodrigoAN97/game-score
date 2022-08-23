@@ -7,7 +7,7 @@ import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class FirestoreService {
 
   constructor(private firestore: Firestore) { }
 

@@ -1,5 +1,5 @@
 import { IGame } from '../read/read.component';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirestoreService } from '../../services/firestore.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
@@ -23,11 +23,11 @@ export class CreateComponent implements OnInit {
   physicalPositions = NbGlobalPhysicalPosition;
 
   constructor(
-    private firebaseService: FirebaseService,
+    private firestoreService: FirestoreService,
     private toastrService: NbToastrService
   ) {
     this.initialForm();
-    this.players$ = this.firebaseService.getCollection('players');
+    this.players$ = this.firestoreService.getCollection('players');
   }
 
   initialForm() {
@@ -56,10 +56,10 @@ export class CreateComponent implements OnInit {
       id: docId,
       date: this.gameForm.value.date,
     };
-    this.firebaseService.setDocument('games', docId, docData);
+    this.firestoreService.setDocument('games', docId, docData);
     this.toastrService.show('Success', 'Game was created sucessfully!', {
       position: this.physicalPositions.TOP_RIGHT,
-      status: 'success'
+      status: 'success',
     });
     this.initialForm();
   }

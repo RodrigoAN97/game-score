@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPlayer } from '../create/create.component';
 import { IGame } from '../read/read.component';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
   selector: 'app-score',
@@ -14,17 +14,15 @@ export class ScoreComponent implements OnInit {
   games$!: Observable<IGame[]>;
   players$!: Observable<IPlayer[]>;
 
-  constructor(private firebaseService: FirebaseService) {
-    this.games$ = this.firebaseService.getCollection('games');
-    this.players$ = this.firebaseService.getCollection('players');
+  constructor(private firestoreService: FirestoreService) {
+    this.games$ = this.firestoreService.getCollection('games');
+    this.players$ = this.firestoreService.getCollection('players');
   }
 
-  values(s:any) {
+  values(s: any) {
     // return Object.keys(s);
-    return s
+    return s;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
