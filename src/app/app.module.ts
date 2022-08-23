@@ -1,32 +1,15 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  NbThemeModule,
-  NbLayoutModule,
-  NbInputModule,
-  NbDatepickerModule,
-  NbButtonModule,
-  NbSelectModule,
-  NbCardModule,
-  NbUserModule,
-  NbIconModule,
-  NbDialogModule,
-  NbTabsetModule,
-  NbToastrModule,
-} from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbThemeModule, NbLayoutModule, NbIconModule, NbButtonModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp } from 'firebase/app';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedModule } from './shared/shared.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc',
@@ -42,27 +25,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConfirmDialogComponent],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    AppRoutingModule,
     NbThemeModule.forRoot({ name: 'dark' }),
     NbLayoutModule,
-    NbEvaIconsModule,
-    AppRoutingModule,
-    NbInputModule,
-    NbDatepickerModule.forRoot(),
-    NbButtonModule,
-    NbSelectModule,
-    ReactiveFormsModule,
-    NbCardModule,
-    NbUserModule,
     NbIconModule,
-    NbDialogModule.forRoot(),
-    NbToastrModule.forRoot(),
-    NbCardModule,
-    NbTabsetModule,
-    HttpClientModule,
+    NbButtonModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
