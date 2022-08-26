@@ -1,13 +1,33 @@
 <nb-layout>
   <nb-layout-header fixed>
     <h4>MyScores</h4>
-    <button nbButton ghost status="danger" (click)="toggleTheme()">
-      <nb-icon
-        [icon]="
-          themeService.currentTheme === 'dark' ? 'sun-outline' : 'moon-outline'
-        "
-      ></nb-icon>
-    </button>
+    <div>
+      <button
+        nbButton
+        ghost
+        status="danger"
+        nbTooltip="Change Theme"
+        (click)="toggleTheme()"
+      >
+        <nb-icon
+          [icon]="
+            themeService.currentTheme === 'dark'
+              ? 'sun-outline'
+              : 'moon-outline'
+          "
+        ></nb-icon>
+      </button>
+      <button
+        *ngIf="authService.currentUser"
+        nbButton
+        ghost
+        status="danger"
+        nbTooltip="Log Out"
+        (click)="logout()"
+      >
+        <nb-icon icon="log-out-outline"></nb-icon>
+      </button>
+    </div>
   </nb-layout-header>
 
   <nb-layout-column>

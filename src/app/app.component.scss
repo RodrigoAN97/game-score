@@ -3,6 +3,10 @@
     button {
       margin-left: auto;
     }
+    ::ng-deep nav {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   nb-layout-column {

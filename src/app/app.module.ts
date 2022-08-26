@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NbThemeModule, NbLayoutModule, NbIconModule, NbButtonModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbIconModule, NbButtonModule, NbTooltipModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
 import { initializeApp } from 'firebase/app';
 import { provideFirebaseApp } from '@angular/fire/app';
@@ -33,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NbIconModule,
     NbButtonModule,
     SharedModule,
+    NbTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -11,6 +11,7 @@ import {
   NbSelectModule,
   NbTabsetModule,
   NbToastrModule,
+  NbTooltipModule,
   NbUserModule,
 } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,6 +39,7 @@ import { BrowserModule } from '@angular/platform-browser';
     NbToastrModule.forRoot(),
     NbTabsetModule,
     HttpClientModule,
+    NbTooltipModule,
   ],
   exports: [CommonModule, ConfirmDialogComponent],
 })
