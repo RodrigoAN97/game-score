@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   getAuth,
   signInWithPopup,
@@ -26,7 +27,7 @@ export interface User {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
         const user = result.user;
         // ...
         console.log('success', { credential, token, user });
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         // Handle Errors here.
