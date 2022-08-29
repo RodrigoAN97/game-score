@@ -7,6 +7,10 @@ import {
   deleteDoc,
   doc,
   setDoc,
+  collectionGroup,
+  query,
+  getDocs,
+  where,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -27,5 +31,15 @@ export class FirestoreService {
   getCollection(collectionName: string): Observable<any[]> {
     const col = collection(this.firestore, collectionName);
     return collectionData(col);
+  }
+
+  async repeatedUser(email: string) {
+    const matchEmail = query(
+      collection(this.firestore, 'users'),
+      where('email', '==', email)
+    );
+    const querySnapshot = await getDocs(matchEmail);
+
+    return !!querySnapshot.size;
   }
 }

@@ -37,6 +37,13 @@ export class AddPlayerComponent implements OnInit {
     const email = this.playerForm.value.email;
     const user = { displayName, email };
 
+    const repeatedUser = await this.firestoreService.repeatedUser(email);
+    if(repeatedUser) {
+      // TODO: create custom alert
+      alert('This email already was a created user');
+      return;
+    }
+
     const confirm = await lastValueFrom(
       this.dialogService.open(ConfirmDialogComponent, {
         context: {
@@ -45,7 +52,7 @@ export class AddPlayerComponent implements OnInit {
         },
       }).onClose
     );
-
+    
     if (confirm) {
       this.firestoreService.setDocument('users', docId, user);
       this.playerForm.reset();
