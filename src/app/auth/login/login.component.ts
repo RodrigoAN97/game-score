@@ -1,11 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../auth.service';
-export interface User {
-  uid: string;
-  email: string;
-  displayName: string;
-  photoURL: string;
-}
 
 @Component({
   selector: 'app-login',
