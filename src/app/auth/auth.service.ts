@@ -28,7 +28,6 @@ google.setCustomParameters({
 })
 export class AuthService {
   auth = getAuth();
-  currentUser: User | null = null;
   constructor(
     private router: Router,
     private firestoreService: FirestoreService
@@ -42,7 +41,6 @@ export class AuthService {
         ) as OAuthCredential;
         const token = credential.accessToken;
         const user = result.user;
-        this.currentUser = user;
         console.log('success', { credential, token, user });
         this.saveUser(user);
         this.router.navigate(['/']);
@@ -60,7 +58,6 @@ export class AuthService {
     signOut(this.auth)
       .then(() => {
         console.log('sign out successful');
-        this.currentUser = null;
       })
       .catch((error) => {
         console.error(error);
