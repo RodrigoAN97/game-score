@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { Observable } from 'rxjs';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { DBUser } from 'src/app/auth/auth.service';
 
 export interface IPlayer {
   player: string;
@@ -19,7 +20,7 @@ export interface IPlayer {
 })
 export class CreateComponent implements OnInit {
   gameForm!: FormGroup;
-  players$!: Observable<IPlayer[]>;
+  players$!: Observable<DBUser[]>;
   physicalPositions = NbGlobalPhysicalPosition;
 
   constructor(
@@ -27,7 +28,7 @@ export class CreateComponent implements OnInit {
     private toastrService: NbToastrService
   ) {
     this.initialForm();
-    this.players$ = this.firestoreService.getCollection('players');
+    this.players$ = this.firestoreService.getCollection('users');
   }
 
   initialForm() {

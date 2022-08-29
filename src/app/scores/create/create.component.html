@@ -7,10 +7,10 @@
           formControlName="player1"
         >
           <nb-option
-            *ngFor="let item of players"
-            [value]="item.player"
-            [disabled]="item.player === gameForm.value.player2"
-            >{{ item.player }}</nb-option
+            *ngFor="let player of players"
+            [value]="player.displayName"
+            [disabled]="player.displayName === gameForm.value.player2"
+            >{{ player.displayName }}</nb-option
           >
         </nb-select>
         <nb-select
@@ -18,10 +18,10 @@
           formControlName="player2"
         >
           <nb-option
-            *ngFor="let item of players"
-            [value]="item.player"
-            [disabled]="item.player === gameForm.value.player1"
-            >{{ item.player }}</nb-option
+            *ngFor="let player of players"
+            [value]="player.displayName"
+            [disabled]="player.displayName === gameForm.value.player1"
+            >{{ player.displayName }}</nb-option
           >
         </nb-select>
       </ng-container>
