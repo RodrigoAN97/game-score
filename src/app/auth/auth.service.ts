@@ -5,10 +5,17 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   OAuthCredential,
-  onAuthStateChanged,
   User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { FirestoreService } from '../services/firestore.service';
+
+export interface DBUser {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+}
 
 const google = new GoogleAuthProvider();
 google.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -22,7 +29,10 @@ google.setCustomParameters({
 export class AuthService {
   auth = getAuth();
   currentUser: User | null = null;
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private firestoreService: FirestoreService
+  ) {}
 
   login() {
     signInWithPopup(this.auth, google)
@@ -34,6 +44,7 @@ export class AuthService {
         const user = result.user;
         this.currentUser = user;
         console.log('success', { credential, token, user });
+        this.saveUser(user);
         this.router.navigate(['/']);
       })
       .catch((error) => {
@@ -54,5 +65,15 @@ export class AuthService {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  saveUser(user: User) {
+    const dbUser: DBUser = {
+      uid: user.uid,
+      email: user.email,
+      photoURL: user.photoURL,
+      displayName: user.displayName,
+    };
+    this.firestoreService.setDocument('users', user.uid, dbUser);
   }
 }
