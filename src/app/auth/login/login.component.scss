@@ -1,4 +1,9 @@
-#google {
+:host {
+  display: flex;
+  justify-content: center;
+
+  #google {
     width: 30px;
     height: 30px;
+  }
 }
