@@ -1,5 +1,11 @@
 import { FirestoreService } from '../../services/firestore.service';
-import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { uid } from 'uid';
+import { lastValueFrom } from 'rxjs';
+import { NbDialogService } from '@nebular/theme';
+import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
+import { regexEmailPattern } from 'src/app/shared/regex';
 
 @Component({
   selector: 'app-add-player',
@@ -8,16 +14,41 @@ import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } fro
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlayerComponent implements OnInit {
-  @ViewChild("playerName") playerName!: ElementRef;
+  playerForm!: FormGroup;
 
-  constructor(private firestoreService: FirestoreService) { }
-
-  ngOnInit(): void {
+  constructor(
+    private firestoreService: FirestoreService,
+    private dialogService: NbDialogService
+  ) {
+    this.playerForm = new FormGroup({
+      displayName: new FormControl('', Validators.required),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(regexEmailPattern),
+      ]),
+    });
   }
 
-  savePlayer() {
-    const player = this.playerName.nativeElement.value as string;
-    this.firestoreService.setDocument('players', player, {player, createdAt: new Date()});
-    this.playerName.nativeElement.value = '';
+  ngOnInit(): void {}
+
+  async savePlayer() {
+    const docId = uid(21);
+    const displayName = this.playerForm.value.displayName;
+    const email = this.playerForm.value.email;
+    const user = { displayName, email };
+
+    const confirm = await lastValueFrom(
+      this.dialogService.open(ConfirmDialogComponent, {
+        context: {
+          title: 'Add',
+          message: `Are you sure to want to add ${displayName}?`,
+        },
+      }).onClose
+    );
+
+    if (confirm) {
+      this.firestoreService.setDocument('users', docId, user);
+      this.playerForm.reset();
+    }
   }
 }

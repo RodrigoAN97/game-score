@@ -1,16 +1,21 @@
 nb-card {
-	width: fit-content;
-	margin: auto;
-	margin-bottom: 20px;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 20px;
 
-	nb-card-body {
-		display: flex;
-		flex-direction: column;
-		
-		button {
-			width: fit-content;
-			margin: auto;
-			margin-top: 20px;
-		}
-	}
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  nb-card-body {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      width: fit-content;
+      margin: auto;
+      margin-top: 20px;
+    }
+  }
 }

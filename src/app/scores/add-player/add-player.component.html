@@ -1,12 +1,20 @@
 <nb-card>
   <nb-card-body>
-    <input
-      #playerName
-      nbInput
-      type="text"
-      placeholder="{{ 'Player Name' | translate }}"
-    />
-    <button status="danger" nbButton (click)="savePlayer()">
+    <form [formGroup]="playerForm">
+      <input
+        formControlName="displayName"
+        nbInput
+        type="text"
+        placeholder="{{ 'Player Name' | translate }}"
+      />
+      <input
+        formControlName="email"
+        nbInput
+        type="text"
+        placeholder="{{ 'Email' | translate }}"
+      />
+    </form>
+    <button status="danger" nbButton [disabled]="!playerForm.valid" (click)="savePlayer()">
       {{ "Add" | translate }}
     </button>
   </nb-card-body>
