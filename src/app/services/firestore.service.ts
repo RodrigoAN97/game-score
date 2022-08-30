@@ -32,7 +32,7 @@ export class FirestoreService {
     return collectionData(col);
   }
 
-  async repeatedUser(email: string) {
+  async repeatedUser(email: string): Promise<boolean> {
     const matchEmail = query(
       collection(this.firestore, 'users'),
       where('email', '==', email)
