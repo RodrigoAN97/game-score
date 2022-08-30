@@ -11,6 +11,8 @@ import {
   getDocs,
   where,
 } from '@angular/fire/firestore';
+import { getDoc } from 'firebase/firestore';
+import { DBUser } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +42,11 @@ export class FirestoreService {
     const querySnapshot = await getDocs(matchEmail);
 
     return !!querySnapshot.size;
+  }
+
+  async getUser(userUid: string) : Promise<DBUser> {
+    const docRef = doc(this.firestore, 'users', userUid);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data() as DBUser;
   }
 }

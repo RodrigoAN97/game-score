@@ -21,13 +21,14 @@ import { CommonModule } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ScorePipe } from './pipes/score.pipe';
+import { PlayerNamePipe } from './pipes/player-name.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [ConfirmDialogComponent, ScorePipe],
+  declarations: [ConfirmDialogComponent, ScorePipe, PlayerNamePipe],
   imports: [
     CommonModule,
     NbCardModule,
@@ -73,6 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NbTooltipModule,
     NbLayoutModule,
     ScorePipe,
+    PlayerNamePipe,
   ],
 })
 export class SharedModule {}
