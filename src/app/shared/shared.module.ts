@@ -20,13 +20,14 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ScorePipe } from './pipes/score.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [ConfirmDialogComponent],
+  declarations: [ConfirmDialogComponent, ScorePipe],
   imports: [
     CommonModule,
     NbCardModule,
@@ -70,7 +71,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NbTabsetModule,
     HttpClientModule,
     NbTooltipModule,
-    NbLayoutModule
+    NbLayoutModule,
+    ScorePipe,
   ],
 })
 export class SharedModule {}
