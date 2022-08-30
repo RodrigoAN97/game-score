@@ -20,7 +20,12 @@ import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/ale
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateComponent implements OnInit {
-  gameForm!: FormGroup;
+  gameForm = new FormGroup({
+    player1: new FormControl('', Validators.required),
+    player2: new FormControl('', Validators.required),
+    winner: new FormControl('', Validators.required),
+    date: new FormControl(new Date(), Validators.required),
+  });
   players$!: Observable<DBUser[]>;
   physicalPositions = NbGlobalPhysicalPosition;
 
@@ -30,17 +35,7 @@ export class CreateComponent implements OnInit {
     private authService: AuthService,
     private dialogService: NbDialogService
   ) {
-    this.initialForm();
     this.players$ = this.firestoreService.getCollection('users');
-  }
-
-  initialForm() {
-    this.gameForm = new FormGroup({
-      player1: new FormControl('', Validators.required),
-      player2: new FormControl('', Validators.required),
-      winner: new FormControl('', Validators.required),
-      date: new FormControl(new Date(), Validators.required),
-    });
   }
 
   async addGame() {
@@ -73,7 +68,7 @@ export class CreateComponent implements OnInit {
       position: this.physicalPositions.TOP_RIGHT,
       status: 'success',
     });
-    this.initialForm();
+    this.gameForm.reset();
   }
 
   addNewPlayer() {
