@@ -12,6 +12,7 @@
             [disabled]="player.displayName === gameForm.value.player2"
             >{{ player.displayName }}</nb-option
           >
+          <nb-option (click)="addNewPlayer()">NEW PLAYER</nb-option>
         </nb-select>
         <nb-select
           placeholder="{{ 'Player' | translate }} 2"
@@ -23,6 +24,7 @@
             [disabled]="player.displayName === gameForm.value.player1"
             >{{ player.displayName }}</nb-option
           >
+          <nb-option (click)="addNewPlayer()">NEW PLAYER</nb-option>
         </nb-select>
       </ng-container>
       <nb-select

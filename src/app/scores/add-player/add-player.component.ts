@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { lastValueFrom } from 'rxjs';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { regexEmailPattern } from 'src/app/shared/regex';
 
@@ -18,7 +18,8 @@ export class AddPlayerComponent implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private dialogRef: NbDialogRef<AddPlayerComponent>
   ) {
     this.playerForm = new FormGroup({
       displayName: new FormControl('', Validators.required),
@@ -38,9 +39,9 @@ export class AddPlayerComponent implements OnInit {
     const user = { displayName, email };
 
     const repeatedUser = await this.firestoreService.repeatedUser(email);
-    if(repeatedUser) {
+    if (repeatedUser) {
       // TODO: create custom alert
-      alert('This email already was a created user');
+      alert('This email already has a created user');
       return;
     }
 
@@ -52,10 +53,10 @@ export class AddPlayerComponent implements OnInit {
         },
       }).onClose
     );
-    
+
     if (confirm) {
       this.firestoreService.setDocument('users', docId, user);
-      this.playerForm.reset();
+      this.dialogRef.close();
     }
   }
 }

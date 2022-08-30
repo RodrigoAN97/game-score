@@ -3,9 +3,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { Observable } from 'rxjs';
-import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import {
+  NbDialogService,
+  NbGlobalPhysicalPosition,
+  NbToastrService,
+} from '@nebular/theme';
 import { AuthService } from '../../auth/auth.service';
 import { DBUser, IGame } from '../../shared/interfaces';
+import { AddPlayerComponent } from '../add-player/add-player.component';
 
 @Component({
   selector: 'app-create',
@@ -21,7 +26,8 @@ export class CreateComponent implements OnInit {
   constructor(
     private firestoreService: FirestoreService,
     private toastrService: NbToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialogService: NbDialogService
   ) {
     this.initialForm();
     this.players$ = this.firestoreService.getCollection('users');
@@ -66,6 +72,10 @@ export class CreateComponent implements OnInit {
       status: 'success',
     });
     this.initialForm();
+  }
+
+  addNewPlayer() {
+    this.dialogService.open(AddPlayerComponent);
   }
 
   ngOnInit(): void {}

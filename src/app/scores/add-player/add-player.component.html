@@ -1,4 +1,7 @@
 <nb-card>
+  <nb-card-header>
+    <h6>{{ "Add Player" | translate }}</h6>
+  </nb-card-header>
   <nb-card-body>
     <form [formGroup]="playerForm">
       <input
@@ -14,7 +17,12 @@
         placeholder="{{ 'Email' | translate }}"
       />
     </form>
-    <button status="danger" nbButton [disabled]="!playerForm.valid" (click)="savePlayer()">
+    <button
+      status="danger"
+      nbButton
+      [disabled]="!playerForm.valid"
+      (click)="savePlayer()"
+    >
       {{ "Add" | translate }}
     </button>
   </nb-card-body>

@@ -8,6 +8,11 @@ nb-card {
     flex-direction: column;
   }
 
+  nb-card-header {
+    display: flex;
+    justify-content: center;
+  }
+
   nb-card-body {
     display: flex;
     flex-direction: column;
