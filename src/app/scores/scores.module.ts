@@ -4,7 +4,7 @@ import { AddPlayerComponent } from './add-player/add-player.component';
 import { CreateComponent } from './create/create.component';
 import { ReadComponent } from './read/read.component';
 import { ScoreComponent } from './score/score.component';
-import { ScorePipe } from '../score.pipe';
+import { ScorePipe } from './score.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';

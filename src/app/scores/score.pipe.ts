@@ -1,4 +1,4 @@
-import { IGame } from './scores/read/read.component';
+import { IGame } from './read/read.component';
 import { Pipe, PipeTransform } from '@angular/core';
 
 interface IScore {
