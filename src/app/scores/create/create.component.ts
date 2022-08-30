@@ -5,7 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { Observable } from 'rxjs';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { DBUser } from 'src/app/auth/auth.service';
+import { AuthService, DBUser } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-create',
@@ -20,7 +20,8 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private authService: AuthService
   ) {
     this.initialForm();
     this.players$ = this.firestoreService.getCollection('users');
@@ -46,11 +47,18 @@ export class CreateComponent implements OnInit {
       return;
     }
 
+    const userUid = this.authService.auth.currentUser?.uid;
+    if (!userUid) {
+      alert('No user logged in!');
+      return;
+    }
+
     const docData: IGame = {
       players,
       winner: this.gameForm.value.winner,
       id: docId,
       date: this.gameForm.value.date,
+      createdBy: userUid,
     };
     this.firestoreService.setDocument('games', docId, docData);
     this.toastrService.show('Success', 'Game was created sucessfully!', {

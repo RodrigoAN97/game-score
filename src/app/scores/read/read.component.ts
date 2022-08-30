@@ -9,6 +9,7 @@ export interface IGame {
   winner: string;
   id: string;
   date: any;
+  createdBy: string;
 }
 
 @Component({
