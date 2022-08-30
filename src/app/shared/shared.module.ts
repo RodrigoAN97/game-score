@@ -22,13 +22,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ScorePipe } from './pipes/score.pipe';
 import { PlayerNamePipe } from './pipes/player-name.pipe';
+import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [ConfirmDialogComponent, ScorePipe, PlayerNamePipe],
+  declarations: [ConfirmDialogComponent, ScorePipe, PlayerNamePipe, AlertDialogComponent],
   imports: [
     CommonModule,
     NbCardModule,

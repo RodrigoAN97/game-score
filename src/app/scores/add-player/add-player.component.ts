@@ -6,6 +6,7 @@ import { lastValueFrom } from 'rxjs';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { regexEmailPattern } from 'src/app/shared/regex';
+import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-add-player',
@@ -40,8 +41,9 @@ export class AddPlayerComponent implements OnInit {
 
     const repeatedUser = await this.firestoreService.repeatedUser(email);
     if (repeatedUser) {
-      // TODO: create custom alert
-      alert('This email already has a created user');
+      this.dialogService.open(AlertDialogComponent, {
+        context: { message: 'This email already has a created user' },
+      });
       return;
     }
 

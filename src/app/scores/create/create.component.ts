@@ -11,6 +11,7 @@ import {
 import { AuthService } from '../../auth/auth.service';
 import { DBUser, IGame } from '../../shared/interfaces';
 import { AddPlayerComponent } from '../add-player/add-player.component';
+import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-create',
@@ -49,13 +50,13 @@ export class CreateComponent implements OnInit {
     const players = [player1, player2];
 
     if (player1 === player2) {
-      alert('You need to choose different players');
+      this.alert('You need to choose different players');
       return;
     }
 
     const userUid = this.authService.auth.currentUser?.uid;
     if (!userUid) {
-      alert('No user logged in!');
+      this.alert('No user logged in!');
       return;
     }
 
@@ -66,7 +67,7 @@ export class CreateComponent implements OnInit {
       date: this.gameForm.value.date,
       createdBy: userUid,
     };
-    console.log({docData});
+    console.log({ docData });
     this.firestoreService.setDocument('games', docId, docData);
     this.toastrService.show('Success', 'Game was created sucessfully!', {
       position: this.physicalPositions.TOP_RIGHT,
@@ -77,6 +78,12 @@ export class CreateComponent implements OnInit {
 
   addNewPlayer() {
     this.dialogService.open(AddPlayerComponent);
+  }
+
+  alert(message: string) {
+    this.dialogService.open(AlertDialogComponent, {
+      context: { message },
+    });
   }
 
   ngOnInit(): void {}
