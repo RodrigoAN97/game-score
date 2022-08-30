@@ -7,11 +7,6 @@ import { Observable } from 'rxjs';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { DBUser } from 'src/app/auth/auth.service';
 
-export interface IPlayer {
-  player: string;
-  createdAt: any;
-}
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
