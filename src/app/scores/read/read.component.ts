@@ -3,14 +3,7 @@ import { FirestoreService } from '../../services/firestore.service';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
-
-export interface IGame {
-  players: string[];
-  winner: string;
-  id: string;
-  date: any;
-  createdBy: string;
-}
+import { IGame } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-read',

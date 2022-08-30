@@ -12,7 +12,7 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { getDoc } from 'firebase/firestore';
-import { DBUser } from '../auth/auth.service';
+import { DBUser } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',

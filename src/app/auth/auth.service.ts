@@ -9,13 +9,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FirestoreService } from '../services/firestore.service';
-
-export interface DBUser {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-}
+import { DBUser } from '../shared/interfaces';
 
 const google = new GoogleAuthProvider();
 google.addScope('https://www.googleapis.com/auth/contacts.readonly');

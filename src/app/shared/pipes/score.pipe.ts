@@ -1,5 +1,5 @@
-import { IGame } from '../../scores/read/read.component';
 import { Pipe, PipeTransform } from '@angular/core';
+import { IGame } from '../interfaces';
 
 interface IScore {
   [key:string] : [number, number];

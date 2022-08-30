@@ -1,11 +1,11 @@
-import { IGame } from '../read/read.component';
 import { FirestoreService } from '../../services/firestore.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
 import { Observable } from 'rxjs';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { AuthService, DBUser } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
+import { DBUser, IGame } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-create',

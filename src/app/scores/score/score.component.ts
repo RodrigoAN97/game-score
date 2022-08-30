@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IGame } from '../read/read.component';
+import { IGame } from '../../shared/interfaces';
 import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
