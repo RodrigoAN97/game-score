@@ -8,7 +8,7 @@
         >
           <nb-option
             *ngFor="let player of players"
-            [value]="player.displayName"
+            [value]="player"
             [disabled]="player.displayName === gameForm.value.player2"
             >{{ player.displayName }}</nb-option
           >
@@ -20,7 +20,7 @@
         >
           <nb-option
             *ngFor="let player of players"
-            [value]="player.displayName"
+            [value]="player"
             [disabled]="player.displayName === gameForm.value.player1"
             >{{ player.displayName }}</nb-option
           >
@@ -33,13 +33,13 @@
       >
         <nb-option
           *ngIf="gameForm.value.player1 as player1"
-          [value]="player1"
-          >{{ player1 }}</nb-option
+          [value]="player1.uid"
+          >{{ player1.displayName }}</nb-option
         >
         <nb-option
           *ngIf="gameForm.value.player2 as player2"
-          [value]="player2"
-          >{{ player2 }}</nb-option
+          [value]="player2.uid"
+          >{{ player2.displayName }}</nb-option
         >
       </nb-select>
       <input

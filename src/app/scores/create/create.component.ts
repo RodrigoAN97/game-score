@@ -42,11 +42,11 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  addGame() {
+  async addGame() {
     const docId = uid(21);
-    const player1 = this.gameForm.value.player1;
-    const player2 = this.gameForm.value.player2;
-    const players = [player1, player2].sort((a, b) => (a < b ? -1 : 1));
+    const player1 = this.gameForm.value.player1.uid;
+    const player2 = this.gameForm.value.player2.uid;
+    const players = [player1, player2];
 
     if (player1 === player2) {
       alert('You need to choose different players');
@@ -66,6 +66,7 @@ export class CreateComponent implements OnInit {
       date: this.gameForm.value.date,
       createdBy: userUid,
     };
+    console.log({docData});
     this.firestoreService.setDocument('games', docId, docData);
     this.toastrService.show('Success', 'Game was created sucessfully!', {
       position: this.physicalPositions.TOP_RIGHT,
