@@ -4,6 +4,7 @@ import { lastValueFrom, map, Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { IGame } from '../../shared/interfaces';
+import { GamesService } from 'src/app/services/games.service';
 
 @Component({
   selector: 'app-read',
@@ -12,15 +13,12 @@ import { IGame } from '../../shared/interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadComponent implements OnInit {
-  games$!: Observable<IGame[]>;
+  games$: Observable<IGame[]> = this.gamesService.games$
   constructor(
     private firestoreService: FirestoreService,
-    private dialogService: NbDialogService
-  ) {
-    this.games$ = this.firestoreService
-      .getCollection('games')
-      .pipe(map((games: IGame[]) => games.sort((a, b) => b.date - a.date)));
-  }
+    private dialogService: NbDialogService,
+    private gamesService: GamesService
+  ) {}
 
   async deleteGame(id: string) {
     const confirm = await lastValueFrom(
