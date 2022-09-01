@@ -13,14 +13,14 @@ const DARK_THEME = 'dark';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  currentLang = 'pt';
   constructor(
-    translate: TranslateService,
+    private translate: TranslateService,
     public themeService: NbThemeService,
     public authService: AuthService
   ) {
-    translate.addLangs(['en', 'pt']);
-    translate.setDefaultLang('pt');
-    translate.use('pt');
+    this.translate.addLangs(['en', 'pt']);
+    this.translate.setDefaultLang(this.currentLang);
   }
 
   toggleTheme() {
@@ -29,6 +29,10 @@ export class AppComponent {
         ? DARK_THEME
         : DEFAULT_THEME
     );
+  }
+
+  changeLanguage(lang: 'pt' | 'en') {
+    this.translate.use(lang);
   }
 
   logout() {

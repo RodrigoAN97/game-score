@@ -2,6 +2,10 @@
   <nb-layout-header fixed>
     <h4>MyScores</h4>
     <div>
+      <nb-select (selectedChange)="changeLanguage($event)" selected="pt">
+        <nb-option value="pt">PT</nb-option>
+        <nb-option value="en">EN</nb-option>
+      </nb-select>
       <button
         nbButton
         ghost

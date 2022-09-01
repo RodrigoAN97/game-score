@@ -3,3 +3,12 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+nb-tab.content-active {
+  padding: 1rem 0 !important;
+}
+
+.nb-theme-dark nb-select .select-button,
+.nb-theme-default nb-select .select-button {
+  min-width: 0;
+}
