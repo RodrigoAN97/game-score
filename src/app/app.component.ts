@@ -13,12 +13,13 @@ const DARK_THEME = 'dark';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  currentLang = 'pt';
+  currentLang: string;
   constructor(
     private translate: TranslateService,
     public themeService: NbThemeService,
     public authService: AuthService
   ) {
+    this.currentLang = navigator.language.startsWith('pt') ? 'pt' : 'en';
     this.translate.addLangs(['en', 'pt']);
     this.translate.setDefaultLang(this.currentLang);
   }
