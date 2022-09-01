@@ -9,6 +9,9 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc',
@@ -19,6 +22,10 @@ const firebaseConfig = {
   appId: '1:701534059859:web:5175f2cf28ee45a18ef5a6',
 };
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,6 +33,13 @@ const firebaseConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     NbThemeModule.forRoot({ name: 'dark' }),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => {

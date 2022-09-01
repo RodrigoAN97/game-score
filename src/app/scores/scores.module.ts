@@ -9,10 +9,6 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ScoresRoutingModule } from './scores-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
-
 @NgModule({
   declarations: [
     AddPlayerComponent,
@@ -21,6 +17,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ScoreComponent,
     TabsComponent,
   ],
-  imports: [SharedModule, ScoresRoutingModule],
+  imports: [ScoresRoutingModule, SharedModule],
 })
 export class ScoresModule {}

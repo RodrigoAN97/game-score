@@ -24,10 +24,6 @@ import { ScorePipe } from './pipes/score.pipe';
 import { PlayerNamePipe } from './pipes/player-name.pipe';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
-
 @NgModule({
   declarations: [ConfirmDialogComponent, ScorePipe, PlayerNamePipe, AlertDialogComponent],
   imports: [
@@ -47,13 +43,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     NbTooltipModule,
     NbLayoutModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
   ],
   exports: [
     CommonModule,
