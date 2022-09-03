@@ -24,6 +24,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ScorePipe } from './pipes/score.pipe';
 import { PlayerNamePipe } from './pipes/player-name.pipe';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
+import { PermissionToDeletePipe } from './pipes/permission-to-delete.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
     ScorePipe,
     PlayerNamePipe,
     AlertDialogComponent,
+    PermissionToDeletePipe,
   ],
   imports: [
     CommonModule,
@@ -73,6 +75,7 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
     ScorePipe,
     PlayerNamePipe,
     NbCheckboxModule,
+    PermissionToDeletePipe,
   ],
 })
 export class SharedModule {}

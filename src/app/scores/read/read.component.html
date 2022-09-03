@@ -18,7 +18,7 @@
           </td>
           <td>{{ game.date.toDate() | date }}</td>
           <td (click)="deleteGame(game.id)" class="deleteGame">
-            <button nbButton ghost status="danger">
+            <button nbButton ghost status="danger" [disabled]="!(game | permissionToDelete)">
               <nb-icon icon="close-outline"></nb-icon>
             </button>
           </td>
