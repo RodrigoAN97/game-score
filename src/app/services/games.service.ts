@@ -15,7 +15,7 @@ export class GamesService {
   colleguesFilter$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );
-  collegues$: Observable<string[]>;
+  colleguesList$: Observable<string[]>;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -23,7 +23,7 @@ export class GamesService {
   ) {
     const userUid = this.authService.auth.currentUser?.uid as string;
 
-    this.collegues$ = (
+    this.colleguesList$ = (
       this.firestoreService.getCollection('games') as Observable<IGame[]>
     ).pipe(
       map((games) => {
@@ -44,14 +44,14 @@ export class GamesService {
       this.firestoreService.getCollection('games') as Observable<IGame[]>,
       this.createdByFilter$,
       this.colleguesFilter$,
-      this.collegues$,
+      this.colleguesList$,
     ]).pipe(
-      map(([games, createdByFilter, colleguesFilter, collegues]) => {
+      map(([games, createdByFilter, colleguesFilter, colleguesList]) => {
         return games.filter((game) => {
           if (createdByFilter) {
             return game.createdBy === userUid;
           } else if (colleguesFilter) {
-            return game.players.some((player) => collegues.includes(player));
+            return game.players.some((player) => colleguesList.includes(player));
           } else {
             return;
           }
