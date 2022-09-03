@@ -1,0 +1,18 @@
+<b>Show games</b>
+<div>
+  <nb-checkbox
+    id="createdBy"
+    (checkedChange)="gamesService.createdByFilter$.next($event)"
+    [checked]="gamesService.createdByFilter$ | async"
+    status="basic"
+  >
+    Created by me
+  </nb-checkbox>
+  <nb-checkbox
+    (checkedChange)="gamesService.colleguesFilter$.next($event)"
+    [checked]="gamesService.colleguesFilter$ | async"
+    status="basic"
+  >
+    Collegues
+  </nb-checkbox>
+</div>

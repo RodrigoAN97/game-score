@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TabsComponent } from './tabs/tabs.component';
 import { ScoresRoutingModule } from './scores-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { OptionsComponent } from './tabs/options/options.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     ReadComponent,
     ScoreComponent,
     TabsComponent,
+    OptionsComponent,
   ],
   imports: [ScoresRoutingModule, SharedModule],
 })

@@ -3,6 +3,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {
   NbButtonModule,
   NbCardModule,
+  NbCheckboxModule,
   NbDatepickerModule,
   NbDialogModule,
   NbIconModule,
@@ -25,7 +26,12 @@ import { PlayerNamePipe } from './pipes/player-name.pipe';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 
 @NgModule({
-  declarations: [ConfirmDialogComponent, ScorePipe, PlayerNamePipe, AlertDialogComponent],
+  declarations: [
+    ConfirmDialogComponent,
+    ScorePipe,
+    PlayerNamePipe,
+    AlertDialogComponent,
+  ],
   imports: [
     CommonModule,
     NbCardModule,
@@ -43,6 +49,7 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
     HttpClientModule,
     NbTooltipModule,
     NbLayoutModule,
+    NbCheckboxModule,
   ],
   exports: [
     CommonModule,
@@ -65,6 +72,7 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
     NbLayoutModule,
     ScorePipe,
     PlayerNamePipe,
+    NbCheckboxModule,
   ],
 })
 export class SharedModule {}
