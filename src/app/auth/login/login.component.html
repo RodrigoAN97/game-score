@@ -2,39 +2,56 @@
   <img id="google" src="/assets/google-logo.svg" />
   {{ "Login with Google" | translate }}
 </button>
-<nb-card>
-  <nb-card-header>{{
-    createNew
-      ? ("Create account" | translate)
-      : ("Login with email" | translate)
-  }}</nb-card-header>
-  <input
-    id="email"
-    type="email"
-    placeholder="{{ 'Email' | translate }}"
-    nbInput
-  />
-  <input
-    class="password"
-    type="password"
-    placeholder="{{ 'Password' | translate }}"
-    nbInput
-  />
-  <input
-    *ngIf="createNew"
-    class="password"
-    type="password"
-    placeholder="{{ 'Confirm password' | translate }}"
-    nbInput
-  />
+
+<nb-card *ngIf="createNew; else login">
+  <nb-card-header>{{ "Create account" | translate }}</nb-card-header>
+  <nb-card-body>
+    <form>
+      <input type="text" placeholder="{{ 'Name' | translate }}" nbInput />
+      <input type="email" placeholder="{{ 'Email' | translate }}" nbInput />
+      <input
+        type="password"
+        placeholder="{{ 'Password' | translate }}"
+        nbInput
+      />
+      <input
+        type="password"
+        placeholder="{{ 'Confirm password' | translate }}"
+        nbInput
+      />
+    </form>
+  </nb-card-body>
   <nb-card-footer>
-    <button nbButton status="success">Login</button>
+    <button nbButton status="success">{{ "Register" | translate }}</button>
     <p (click)="createNew = !createNew">
-      {{
-        createNew
-          ? ("If you already have an account click here to login" | translate)
-          : ("Don't have an account yet? Click here to register" | translate)
-      }}
+      {{ "If you already have an account click here to login" | translate }}
     </p>
   </nb-card-footer>
 </nb-card>
+
+<ng-template #login>
+  <nb-card>
+    <nb-card-header>{{ "Login with email" | translate }}</nb-card-header>
+    <nb-card-body>
+      <form>
+        <input
+          id="email"
+          type="email"
+          placeholder="{{ 'Email' | translate }}"
+          nbInput
+        />
+        <input
+          type="password"
+          placeholder="{{ 'Password' | translate }}"
+          nbInput
+        />
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton status="success">{{ "Login" | translate }}</button>
+      <p (click)="createNew = !createNew">
+        {{ "Don't have an account yet? Click here to register" | translate }}
+      </p>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

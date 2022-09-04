@@ -17,9 +17,6 @@
     padding: 10px;
     text-align: center;
     margin: 30px auto;
-    input.password {
-      margin-top: 10px;
-    }
     nb-card-footer {
       display: flex;
       flex-direction: column;
@@ -29,6 +26,15 @@
         margin-bottom: 0;
         cursor: pointer;
         max-width: 200px;
+      }
+    }
+    nb-card-body {
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      form * {
+        margin-bottom: 10px;
       }
     }
   }
