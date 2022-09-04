@@ -44,9 +44,15 @@ export class LoginComponent implements OnInit {
     this.authService.loginWithGoogle();
   }
 
+  loginWithEmail() {
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    this.authService.loginWithEmail(email, password);
+  }
+
   registerWithEmail() {
     const email = this.createUserForm.value.email;
     const password = this.createUserForm.value.password;
-    console.log({ email, password });
+    this.authService.registerWithEmail(email, password);
   }
 }

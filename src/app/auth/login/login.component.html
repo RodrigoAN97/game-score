@@ -65,22 +65,30 @@
   <nb-card>
     <nb-card-header>{{ "Login with email" | translate }}</nb-card-header>
     <nb-card-body>
-      <form>
+      <form [formGroup]="loginForm">
         <input
-          id="email"
           type="email"
+          formControlName="email"
           placeholder="{{ 'Email' | translate }}"
           nbInput
         />
         <input
           type="password"
+          formControlName="password"
           placeholder="{{ 'Password' | translate }}"
           nbInput
         />
       </form>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton status="success">{{ "Login" | translate }}</button>
+      <button
+        (click)="loginWithEmail()"
+        [disabled]="!loginForm.valid"
+        nbButton
+        status="success"
+      >
+        {{ "Login" | translate }}
+      </button>
       <p (click)="createNew = !createNew">
         {{ "Don't have an account yet? Click here to register" | translate }}
       </p>

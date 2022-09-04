@@ -7,6 +7,7 @@ import {
   OAuthCredential,
   User,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FirestoreService } from '../services/firestore.service';
@@ -55,12 +56,28 @@ export class AuthService {
         // Signed in
         const user = userCredential.user;
         this.saveUser(user);
+        this.router.navigate(['/']);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
+      });
+  }
+
+  loginWithEmail(email: string, password: string) {
+    signInWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        this.saveUser(user);
+        this.router.navigate(['/']);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
   }
 
