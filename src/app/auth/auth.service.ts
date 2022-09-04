@@ -50,12 +50,12 @@ export class AuthService {
       });
   }
 
-  registerWithEmail(email: string, password: string) {
+  registerWithEmail(email: string, password: string, displayName: string) {
     createUserWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        this.saveUser(user);
+        this.saveUser({...user, displayName});
         this.router.navigate(['/']);
         // ...
       })

@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
   registerWithEmail() {
     const email = this.createUserForm.value.email;
     const password = this.createUserForm.value.password;
-    this.authService.registerWithEmail(email, password);
+    const displayName = this.createUserForm.value.displayName;
+    this.authService.registerWithEmail(email, password, displayName);
   }
 }
