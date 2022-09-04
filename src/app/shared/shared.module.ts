@@ -16,12 +16,11 @@ import {
   NbTooltipModule,
   NbUserModule,
 } from '@nebular/theme';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ScorePipe } from './pipes/score.pipe';
 import { PlayerNamePipe } from './pipes/player-name.pipe';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
