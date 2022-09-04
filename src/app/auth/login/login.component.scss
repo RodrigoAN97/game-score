@@ -32,6 +32,10 @@
       form {
         display: flex;
         flex-direction: column;
+        nb-alert {
+          height: fit-content;
+          padding: 5px 10px;
+        }
       }
       form * {
         margin-bottom: 10px;

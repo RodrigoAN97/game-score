@@ -6,23 +6,55 @@
 <nb-card *ngIf="createNew; else login">
   <nb-card-header>{{ "Create account" | translate }}</nb-card-header>
   <nb-card-body>
-    <form>
-      <input type="text" placeholder="{{ 'Name' | translate }}" nbInput />
-      <input type="email" placeholder="{{ 'Email' | translate }}" nbInput />
+    <form [formGroup]="createUserForm">
+      <input
+        type="text"
+        formControlName="displayName"
+        placeholder="{{ 'Name' | translate }}"
+        nbInput
+      />
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="{{ 'Email' | translate }}"
+        nbInput
+      />
       <input
         type="password"
+        formControlName="password"
         placeholder="{{ 'Password' | translate }}"
         nbInput
       />
       <input
         type="password"
+        formControlName="confirmPassword"
         placeholder="{{ 'Confirm password' | translate }}"
         nbInput
       />
+      <nb-alert
+        status="danger"
+        size="tiny"
+        *ngIf="
+          createUserForm.value.confirmPassword &&
+          createUserForm.value.password !== createUserForm.value.confirmPassword
+        "
+      >
+        {{ "The passwords need to match!" | translate }}
+      </nb-alert>
     </form>
   </nb-card-body>
   <nb-card-footer>
-    <button nbButton status="success">{{ "Register" | translate }}</button>
+    <button
+      (click)="registerWithEmail()"
+      [disabled]="
+        !createUserForm.valid ||
+        createUserForm.value.password !== createUserForm.value.confirmPassword
+      "
+      nbButton
+      status="success"
+    >
+      {{ "Register" | translate }}
+    </button>
     <p (click)="createNew = !createNew">
       {{ "If you already have an account click here to login" | translate }}
     </p>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {
+  NbAlertModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
@@ -52,6 +53,7 @@ import { PermissionToDeletePipe } from './pipes/permission-to-delete.pipe';
     NbTooltipModule,
     NbLayoutModule,
     NbCheckboxModule,
+    NbAlertModule,
   ],
   exports: [
     CommonModule,
@@ -76,6 +78,7 @@ import { PermissionToDeletePipe } from './pipes/permission-to-delete.pipe';
     PlayerNamePipe,
     NbCheckboxModule,
     PermissionToDeletePipe,
+    NbAlertModule,
   ],
 })
 export class SharedModule {}

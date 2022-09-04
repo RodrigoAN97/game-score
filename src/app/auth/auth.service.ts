@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   OAuthCredential,
   User,
+  createUserWithEmailAndPassword,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FirestoreService } from '../services/firestore.service';
@@ -45,6 +46,21 @@ export class AuthService {
         const email = error.customData.email;
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.log('error', { errorCode, errorMessage, email, credential });
+      });
+  }
+
+  registerWithEmail(email: string, password: string) {
+    createUserWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        this.saveUser(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
       });
   }
 
