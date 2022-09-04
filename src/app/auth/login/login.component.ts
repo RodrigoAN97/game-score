@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
+  createNew = false;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}

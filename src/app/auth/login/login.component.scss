@@ -17,17 +17,18 @@
     padding: 10px;
     text-align: center;
     margin: 30px auto;
-    input#email {
-      margin-bottom: 10px;
+    input.password {
+      margin-top: 10px;
     }
     nb-card-footer {
       display: flex;
       flex-direction: column;
       width: fit-content;
       margin: auto;
-      b {
-        margin-top: 10px;
+      p {
+        margin-bottom: 0;
         cursor: pointer;
+        max-width: 200px;
       }
     }
   }

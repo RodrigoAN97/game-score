@@ -17,5 +17,8 @@
   "You have": "Você tem",
   "Email": "Email",
   "Password": "Senha",
-  "Create account": "Criar conta"
+  "Create account": "Criar conta",
+  "Don't have an account yet? Click here to register": "Não tem uma conta ainda? Clique aqui para se registrar",
+  "If you already have an account click here to login": "Se você já tem uma conta clique aqui para entrar",
+  "Confirm password": "Confirmar senha"
 }
