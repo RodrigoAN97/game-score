@@ -27,7 +27,7 @@ export class AuthService {
     private firestoreService: FirestoreService
   ) {}
 
-  login() {
+  loginWithGoogle() {
     signInWithPopup(this.auth, google)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(

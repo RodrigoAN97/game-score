@@ -1,6 +1,7 @@
 {
   "Beat your opponent": "Beat your opponent",
   "Login with Google": "Login with Google",
+  "Login with email": "Login with email",
   "Add Player": "Add Player",
   "Create Game": "Create Game",
   "Score": "Score",
@@ -14,5 +15,7 @@
   "games": "games",
   "Date": "Date",
   "You have": "You have",
-  "Email": "Email"
+  "Email": "Email",
+  "Password": "Password",
+  "Create account": "Create account"
 }

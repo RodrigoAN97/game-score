@@ -1,4 +1,23 @@
-<button nbButton (click)="login()">
+<button nbButton id="loginGoogle" (click)="loginWithGoogle()">
   <img id="google" src="/assets/google-logo.svg" />
   {{ "Login with Google" | translate }}
 </button>
+<nb-card>
+  <nb-card-header>{{ "Login with email" | translate }}</nb-card-header>
+  <input
+    id="email"
+    type="email"
+    placeholder="{{ 'Email' | translate }}"
+    nbInput
+  />
+  <input
+    id="password"
+    type="password"
+    placeholder="{{ 'Password' | translate }}"
+    nbInput
+  />
+  <nb-card-footer>
+    <button nbButton status="success">Login</button>
+    <b>{{ "Create account" | translate }}</b>
+  </nb-card-footer>
+</nb-card>

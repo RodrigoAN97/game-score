@@ -1,6 +1,7 @@
 {
   "Beat your opponent": "Vença seu oponente",
-  "Login with Google": "Logar com Google",
+  "Login with Google": "Login com Google",
+  "Login with email": "Login com email",
   "Add Player": "Adicionar Jogador",
   "Create Game": "Criar Jogo",
   "Score": "Placar",
@@ -14,5 +15,7 @@
   "games": "jogos",
   "Date": "Data",
   "You have": "Você tem",
-  "Email": "Email"
+  "Email": "Email",
+  "Password": "Senha",
+  "Create account": "Criar conta"
 }
