@@ -27,7 +27,7 @@ export class CreateComponent implements OnInit {
     winner: new FormControl('', Validators.required),
     date: new FormControl(new Date(), Validators.required),
   });
-  players$!: Observable<DBUser[]>;
+  players$: Observable<DBUser[]>;
   physicalPositions = NbGlobalPhysicalPosition;
 
   constructor(

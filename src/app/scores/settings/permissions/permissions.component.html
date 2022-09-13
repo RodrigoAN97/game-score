@@ -1,6 +1,3 @@
-<nb-select multiple placeholder="Select Users">
-  <nb-option value="1">Option 1</nb-option>
-  <nb-option value="2">Option 2</nb-option>
-  <nb-option value="3">Option 3</nb-option>
-  <nb-option value="4">Option 4</nb-option>
+<nb-select multiple placeholder="Select Users" *ngIf="players$ | async as players">
+  <nb-option *ngFor="let player of players" [value]="player">{{player.displayName}}</nb-option>
 </nb-select>
