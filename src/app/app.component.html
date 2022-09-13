@@ -10,7 +10,13 @@
         <nb-option value="pt">PT</nb-option>
         <nb-option value="en">EN</nb-option>
       </nb-select>
-      <button ghost status="danger" nbButton nbTooltip="Settings" (click)="openSettings()">
+      <button
+        ghost
+        status="danger"
+        nbButton
+        nbTooltip="Settings"
+        (click)="openSettings()"
+      >
         <nb-icon icon="settings-outline"></nb-icon>
       </button>
       <button
@@ -29,7 +35,7 @@
         ></nb-icon>
       </button>
       <button
-        *ngIf="authService.auth.currentUser"
+        *ngIf="authService.currentUser$ | async"
         nbButton
         ghost
         status="danger"

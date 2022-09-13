@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {
   collectionData,
@@ -10,6 +10,8 @@ import {
   query,
   getDocs,
   where,
+  updateDoc,
+  docData,
 } from '@angular/fire/firestore';
 import { getDoc } from 'firebase/firestore';
 import { DBUser } from '../shared/interfaces';
@@ -24,6 +26,11 @@ export class FirestoreService {
     this.read();
     const collectionRef = collection(this.firestore, collectionName);
     await setDoc(doc(collectionRef, docId), docData);
+  }
+
+  async updateDocument(collectionName: string, docId: string, changedData: any) {
+    const collectionRef = collection(this.firestore, collectionName);
+    await updateDoc(doc(collectionRef, docId), changedData);
   }
 
   async deleteDocument(collectionName: string, docId: string) {
@@ -53,6 +60,16 @@ export class FirestoreService {
     const docRef = doc(this.firestore, 'users', userUid);
     const docSnap = await getDoc(docRef);
     return docSnap.data() as DBUser;
+  }
+
+  getUser$(userUid: string | undefined): Observable<any> {
+    this.read();
+    if(!userUid) {
+      return of(undefined);
+    }
+    const docRef = doc(this.firestore, 'users', userUid);
+    const userData = docData(docRef);
+    return userData;
   }
 
   read() {

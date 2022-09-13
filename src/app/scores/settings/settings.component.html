@@ -16,7 +16,7 @@
                     Can create games for you
                 </nb-accordion-item-header>
                 <nb-accordion-item-body>
-                    <app-permissions></app-permissions>
+                    <app-permissions (permissionsChange)="updatedPermittedUsers = $event"></app-permissions>
                 </nb-accordion-item-body>
               </nb-accordion-item>
         </nb-accordion>

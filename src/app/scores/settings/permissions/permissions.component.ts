@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { FirestoreService } from 'src/app/services/firestore.service';
 import { GamesService } from 'src/app/services/games.service';
 import { DBUser } from 'src/app/shared/interfaces';
 import { AuthService } from '../../../auth/auth.service';
@@ -11,19 +12,24 @@ import { AuthService } from '../../../auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PermissionsComponent implements OnInit {
-  players$!: Observable<DBUser[]>;
+  players$: Observable<DBUser[]>;
+  userUid = this.authService.userUid as string;
+  @Output() permissionsChange = new EventEmitter<string[]>();
 
   constructor(
     private gamesService: GamesService,
-    private authService: AuthService
+    public authService: AuthService,
+    private firestoreService: FirestoreService
   ) {
-    const userUid = authService.auth.currentUser?.uid as string;
-
     this.players$ = this.gamesService.players$.pipe(
       map((players) => {
-        return players.filter((player) => player.uid !== userUid);
+        return players.filter((player) => player.uid !== this.userUid);
       })
     );
+  }
+
+  changePermissions(users: string[]){
+    this.permissionsChange.emit(users);
   }
 
   ngOnInit(): void {}

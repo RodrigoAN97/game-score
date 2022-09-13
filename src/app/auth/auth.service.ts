@@ -10,6 +10,8 @@ import {
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { onAuthStateChanged } from 'firebase/auth';
+import { Observable } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
 import { DBUser } from '../shared/interfaces';
 
@@ -23,11 +25,18 @@ google.setCustomParameters({
   providedIn: 'root',
 })
 export class AuthService {
-  auth = getAuth();
+  private auth = getAuth();
+  userUid: string | undefined;
+  currentUser$!: Observable<DBUser | null>;
   constructor(
     private router: Router,
     private firestoreService: FirestoreService
-  ) {}
+  ) {
+    onAuthStateChanged(this.auth, (user) => {
+      this.userUid = user?.uid;
+      this.currentUser$ = this.firestoreService.getUser$(this.userUid);
+    });
+  }
 
   loginWithGoogle() {
     signInWithPopup(this.auth, google)

@@ -9,7 +9,7 @@ export class PermissionToDeletePipe implements PipeTransform {
   constructor(private authService: AuthService) {}
 
   transform(game: IGame): boolean {
-    const userUid = this.authService.auth.currentUser?.uid as string;
+    const userUid = this.authService.userUid as string;
     return game.createdBy === userUid || game.players.includes(userUid);
   }
 }

@@ -1,3 +1,13 @@
-<nb-select multiple placeholder="Select Users" *ngIf="players$ | async as players">
-  <nb-option *ngFor="let player of players" [value]="player">{{player.displayName}}</nb-option>
-</nb-select>
+<ng-container *ngIf="authService.currentUser$ | async as currentUser">
+  <nb-select
+    multiple
+    placeholder="Select Users"
+    (selectedChange)="changePermissions($event)"
+    *ngIf="players$ | async as players"
+    [selected]="currentUser.permittedUsers"
+  >
+    <nb-option *ngFor="let player of players" [value]="player.uid">{{
+      player.displayName
+    }}</nb-option>
+  </nb-select>
+</ng-container>
