@@ -8,11 +8,11 @@ import { GamesService } from 'src/app/services/games.service';
 
 @Component({
   selector: 'app-read',
-  templateUrl: './read.component.html',
-  styleUrls: ['./read.component.scss'],
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReadComponent implements OnInit {
+export class HistoryComponent implements OnInit {
   games$: Observable<IGame[]> = this.gamesService.games$
   constructor(
     private firestoreService: FirestoreService,
