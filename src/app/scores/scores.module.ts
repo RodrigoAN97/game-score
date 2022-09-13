@@ -6,7 +6,8 @@ import { ScoreComponent } from './score/score.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ScoresRoutingModule } from './scores-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { OptionsComponent } from './tabs/options/options.component';
+import { OptionsComponent } from './settings/options/options.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { OptionsComponent } from './tabs/options/options.component';
     ScoreComponent,
     TabsComponent,
     OptionsComponent,
+    SettingsComponent,
   ],
   imports: [ScoresRoutingModule, SharedModule],
 })

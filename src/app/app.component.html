@@ -2,10 +2,17 @@
   <nb-layout-header fixed>
     <h4>MyScores</h4>
     <div>
-      <nb-select [(selected)]="currentLang" (selectedChange)="changeLanguage($event)" selected="pt">
+      <nb-select
+        [(selected)]="currentLang"
+        (selectedChange)="changeLanguage($event)"
+        selected="pt"
+      >
         <nb-option value="pt">PT</nb-option>
         <nb-option value="en">EN</nb-option>
       </nb-select>
+      <button ghost status="danger" nbButton nbTooltip="Settings" (click)="openSettings()">
+        <nb-icon icon="settings-outline"></nb-icon>
+      </button>
       <button
         nbButton
         ghost

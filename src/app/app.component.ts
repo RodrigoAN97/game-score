@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NbDialogService, NbThemeService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './auth/auth.service';
+import { SettingsComponent } from './scores/settings/settings.component';
 
 const DEFAULT_THEME = 'default';
 const DARK_THEME = 'dark';
@@ -17,7 +18,8 @@ export class AppComponent {
   constructor(
     private translate: TranslateService,
     public themeService: NbThemeService,
-    public authService: AuthService
+    public authService: AuthService,
+    private dialogService: NbDialogService
   ) {
     this.currentLang = navigator.language.startsWith('pt') ? 'pt' : 'en';
     this.translate.addLangs(['en', 'pt']);
@@ -30,6 +32,10 @@ export class AppComponent {
         ? DARK_THEME
         : DEFAULT_THEME
     );
+  }
+
+  openSettings() {
+    this.dialogService.open(SettingsComponent);
   }
 
   changeLanguage(lang: 'pt' | 'en') {
