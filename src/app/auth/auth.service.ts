@@ -55,7 +55,7 @@ export class AuthService {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        this.saveUser({...user, displayName});
+        this.saveUser({ ...user, displayName });
         this.router.navigate(['/']);
         // ...
       })
@@ -97,6 +97,7 @@ export class AuthService {
       email: user.email,
       photoURL: user.photoURL,
       displayName: user.displayName,
+      permittedUsers: [],
     };
     this.firestoreService.setDocument('users', user.uid, dbUser);
   }

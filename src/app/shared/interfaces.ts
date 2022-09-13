@@ -11,4 +11,5 @@ export interface DBUser {
   email: string | null;
   displayName: string | null;
   photoURL: string | null;
+  permittedUsers: string[];
 }
