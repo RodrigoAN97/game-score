@@ -12,6 +12,7 @@ import { AuthService } from '../../auth/auth.service';
 import { DBUser, IGame } from '../../shared/interfaces';
 import { AddPlayerComponent } from '../add-player/add-player.component';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+import { GamesService } from 'src/app/services/games.service';
 
 @Component({
   selector: 'app-create',
@@ -33,9 +34,10 @@ export class CreateComponent implements OnInit {
     private firestoreService: FirestoreService,
     private toastrService: NbToastrService,
     private authService: AuthService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private gamesService: GamesService
   ) {
-    this.players$ = this.firestoreService.getCollection('users');
+    this.players$ = this.gamesService.players$;
   }
 
   async addGame() {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { IGame } from '../shared/interfaces';
+import { DBUser, IGame } from '../shared/interfaces';
 import { FirestoreService } from './firestore.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -14,6 +14,7 @@ export class GamesService {
   createdByGames$: Observable<IGame[]>;
   colleguesGames$: Observable<IGame[]>;
   myGames$: Observable<IGame[]>;
+  players$: Observable<DBUser[]> = this.firestoreService.getCollection('users');
 
   createdByFilter$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
