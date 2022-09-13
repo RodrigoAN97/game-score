@@ -12,17 +12,17 @@ export class GamesService {
     this.firestoreService.getCollection('games');
   games$!: Observable<IGame[]>;
   createdByGames$: Observable<IGame[]>;
-  colleguesGames$: Observable<IGame[]>;
+  colleaguesGames$: Observable<IGame[]>;
   myGames$: Observable<IGame[]>;
   players$: Observable<DBUser[]> = this.firestoreService.getCollection('users');
 
   createdByFilter$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );
-  colleguesFilter$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+  colleaguesFilter$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );
-  colleguesList$: Observable<string[]>;
+  colleaguesList$: Observable<string[]>;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -30,7 +30,7 @@ export class GamesService {
   ) {
     const userUid = this.authService.auth.currentUser?.uid as string;
 
-    this.colleguesList$ = (
+    this.colleaguesList$ = (
       this.firestoreService.getCollection('games') as Observable<IGame[]>
     ).pipe(
       map((games) => {
@@ -60,19 +60,19 @@ export class GamesService {
       })
     );
 
-    this.colleguesGames$ = combineLatest([
+    this.colleaguesGames$ = combineLatest([
       this.initialGames$,
-      this.colleguesFilter$,
-      this.colleguesList$,
+      this.colleaguesFilter$,
+      this.colleaguesList$,
     ]).pipe(
-      map(([initialGames, colleguesFilter, colleguesList]) => {
-        if (!colleguesFilter) {
+      map(([initialGames, colleaguesFilter, colleaguesList]) => {
+        if (!colleaguesFilter) {
           return [];
         } else {
           return initialGames.filter(
             (game) =>
               !game.players.includes(userUid) &&
-              game.players.some((p) => colleguesList.includes(p))
+              game.players.some((p) => colleaguesList.includes(p))
           );
         }
       })
@@ -86,12 +86,12 @@ export class GamesService {
 
     this.games$ = combineLatest([
       this.createdByGames$,
-      this.colleguesGames$,
+      this.colleaguesGames$,
       this.myGames$,
     ]).pipe(
-      map(([createdByGames, colleguesGames, myGames]) => {
+      map(([createdByGames, colleaguesGames, myGames]) => {
         let games: IGame[] = [];
-        const allGames = [...createdByGames, ...colleguesGames, ...myGames];
+        const allGames = [...createdByGames, ...colleaguesGames, ...myGames];
         allGames.forEach((game) => {
           if (!JSON.stringify(games).includes(JSON.stringify(game))) {
             games.push(game);
