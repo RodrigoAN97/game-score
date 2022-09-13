@@ -1,7 +1,25 @@
 <nb-card>
     <nb-card-header>Settings</nb-card-header>
     <nb-card-body>
-        <app-options></app-options>
+        
+        <nb-accordion>
+            <nb-accordion-item>
+              <nb-accordion-item-header>
+                Show Games
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+               <app-options></app-options>
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+            <nb-accordion-item>
+                <nb-accordion-item-header>
+                    Can create games for you
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    <app-permissions></app-permissions>
+                </nb-accordion-item-body>
+              </nb-accordion-item>
+        </nb-accordion>
+
     </nb-card-body>
-    <nb-card-footer>FOOTER</nb-card-footer>
 </nb-card>

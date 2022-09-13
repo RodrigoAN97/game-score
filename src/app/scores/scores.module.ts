@@ -8,6 +8,7 @@ import { ScoresRoutingModule } from './scores-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { OptionsComponent } from './settings/options/options.component';
 import { SettingsComponent } from './settings/settings.component';
+import { PermissionsComponent } from './settings/permissions/permissions.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SettingsComponent } from './settings/settings.component';
     TabsComponent,
     OptionsComponent,
     SettingsComponent,
+    PermissionsComponent,
   ],
   imports: [ScoresRoutingModule, SharedModule],
 })
