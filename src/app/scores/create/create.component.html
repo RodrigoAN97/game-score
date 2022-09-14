@@ -1,7 +1,7 @@
 <nb-card>
   <nb-card-body>
     <form [formGroup]="gameForm" class="addGame" (ngSubmit)="addGame()">
-      <ng-container *ngIf="players$ | async as players">
+      <ng-container *ngIf="players$ | async | permissionToCreate as players">
         <nb-select
           placeholder="{{ 'Player' | translate }} 1"
           formControlName="player1"

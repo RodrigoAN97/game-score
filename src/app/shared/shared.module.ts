@@ -26,6 +26,7 @@ import { ScorePipe } from './pipes/score.pipe';
 import { PlayerNamePipe } from './pipes/player-name.pipe';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 import { PermissionToDeletePipe } from './pipes/permission-to-delete.pipe';
+import { PermissionToCreatePipe } from './pipes/permission-to-create.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PermissionToDeletePipe } from './pipes/permission-to-delete.pipe';
     PlayerNamePipe,
     AlertDialogComponent,
     PermissionToDeletePipe,
+    PermissionToCreatePipe,
   ],
   imports: [
     CommonModule,
@@ -79,6 +81,7 @@ import { PermissionToDeletePipe } from './pipes/permission-to-delete.pipe';
     PlayerNamePipe,
     NbCheckboxModule,
     PermissionToDeletePipe,
+    PermissionToCreatePipe,
     NbAlertModule,
     NbAccordionModule
   ],
