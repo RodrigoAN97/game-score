@@ -1,5 +1,14 @@
 <nb-card>
   <nb-card-body>
+    <button [nbPopover]="message" nbButton ghost status="danger">
+      <nb-icon icon="info-outline"></nb-icon>
+    </button>
+    <ng-template #message>
+      <div id="messagePopup">
+        The players showed here are the ones that have allowed you to create
+        games in their names or the ones that you have pre registered
+      </div>
+    </ng-template>
     <form [formGroup]="gameForm" class="addGame" (ngSubmit)="addGame()">
       <ng-container *ngIf="players$ | async | permissionToCreate as players">
         <nb-select

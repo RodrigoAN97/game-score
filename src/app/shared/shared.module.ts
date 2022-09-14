@@ -11,6 +11,7 @@ import {
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
+  NbPopoverModule,
   NbSelectModule,
   NbTabsetModule,
   NbToastrModule,
@@ -56,7 +57,8 @@ import { PermissionToCreatePipe } from './pipes/permission-to-create.pipe';
     NbLayoutModule,
     NbCheckboxModule,
     NbAlertModule,
-    NbAccordionModule
+    NbAccordionModule,
+    NbPopoverModule,
   ],
   exports: [
     CommonModule,
@@ -83,7 +85,8 @@ import { PermissionToCreatePipe } from './pipes/permission-to-create.pipe';
     PermissionToDeletePipe,
     PermissionToCreatePipe,
     NbAlertModule,
-    NbAccordionModule
+    NbAccordionModule,
+    NbPopoverModule,
   ],
 })
 export class SharedModule {}
