@@ -5,7 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 

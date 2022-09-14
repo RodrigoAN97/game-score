@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { GamesService } from 'src/app/services/games.service';
 import { DBUser } from 'src/app/shared/interfaces';
 import { AuthService } from '../../../auth/auth.service';
@@ -19,7 +18,6 @@ export class PermissionsComponent implements OnInit {
   constructor(
     private gamesService: GamesService,
     public authService: AuthService,
-    private firestoreService: FirestoreService
   ) {
     this.players$ = this.gamesService.players$.pipe(
       map((players) => {
