@@ -66,7 +66,7 @@ export class CreateComponent implements OnInit {
     };
     console.log({ docData });
     this.firestoreService.setDocument('games', docId, docData);
-    this.toastrService.show('Success', 'Game was created sucessfully!', {
+    this.toastrService.show('Success', 'Game was created successfully!', {
       position: this.physicalPositions.TOP_RIGHT,
       status: 'success',
     });
