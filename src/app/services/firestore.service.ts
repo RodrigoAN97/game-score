@@ -28,9 +28,24 @@ export class FirestoreService {
     await setDoc(doc(collectionRef, docId), docData);
   }
 
-  async updateDocument(collectionName: string, docId: string, changedData: any) {
+  async upsertDocument(
+    collectionName: string,
+    docId: string,
+    data: any
+  ) {
     const collectionRef = collection(this.firestore, collectionName);
-    await updateDoc(doc(collectionRef, docId), changedData);
+    const exists = await this.docExists(collectionName, docId);
+    if(exists) {
+      await updateDoc(doc(collectionRef, docId), data);
+    } else {
+      await this.setDocument(collectionName, docId, data);
+    }
+  }
+
+  async docExists(collectionName: string, docId: string) {
+    const docRef = doc(this.firestore, collectionName, docId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.exists() ? true : false;
   }
 
   async deleteDocument(collectionName: string, docId: string) {
@@ -64,7 +79,7 @@ export class FirestoreService {
 
   getUser$(userUid: string | undefined): Observable<any> {
     this.read();
-    if(!userUid) {
+    if (!userUid) {
       return of(undefined);
     }
     const docRef = doc(this.firestore, 'users', userUid);
