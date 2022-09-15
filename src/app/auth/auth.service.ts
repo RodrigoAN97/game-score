@@ -101,13 +101,13 @@ export class AuthService {
   }
 
   saveUser(user: User) {
-    const dbUser: DBUser = {
+    const newUser: Partial<DBUser> = {
       uid: user.uid,
       email: user.email,
-      photoURL: user.photoURL,
-      displayName: user.displayName,
-      permittedUsers: [],
     };
-    this.firestoreService.setDocument('users', user.uid, dbUser);
+    if(user.displayName) newUser.displayName = user.displayName;
+    if(user.photoURL) newUser.photoURL = user.photoURL;
+
+    this.firestoreService.upsertDocument('users', user.uid, newUser);
   }
 }
