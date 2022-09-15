@@ -25,7 +25,7 @@ google.setCustomParameters({
   providedIn: 'root',
 })
 export class AuthService {
-  private auth = getAuth();
+  auth = getAuth();
   userUid: string | undefined;
   currentUser$!: Observable<DBUser | null>;
   constructor(

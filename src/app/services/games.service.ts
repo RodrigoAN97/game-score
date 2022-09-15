@@ -28,7 +28,7 @@ export class GamesService {
     private firestoreService: FirestoreService,
     private authService: AuthService
   ) {
-    const userUid = this.authService.userUid as string;
+    const userUid = this.authService.auth.currentUser?.uid as string;
 
     this.colleaguesList$ = (
       this.firestoreService.getCollection('games') as Observable<IGame[]>
