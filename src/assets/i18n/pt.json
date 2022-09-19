@@ -23,5 +23,14 @@
   "Confirm password": "Confirmar senha",
   "Name": "Nome",
   "Register": "Registrar",
-  "The passwords need to match!": "As senhas precisam ser iguais!"
+  "The passwords need to match!": "As senhas precisam ser iguais!",
+  "The players showed here are the ones that have allowed you to create games in their names or the ones that you have pre registered": "Os jogadores mostrados aqui são aqueles que permitiram que você crie jogos em nome deles ou aqueles que você pré-registrou",
+  "NEW PLAYER": "NOVO JOGADOR",
+  "Created by me": "Criados por mim",
+  "Colleagues": "Colegas",
+  "Settings": "Configurações",
+  "Show Games": "Mostar Jogos",
+  "Can create games for you": "Podem criar jogos para você",
+  "Select Users": "Selecionar Usuários",
+  "Alert": "Alerta"
 }

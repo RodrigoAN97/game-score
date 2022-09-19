@@ -5,8 +5,10 @@
     </button>
     <ng-template #message>
       <div id="messagePopup">
-        The players showed here are the ones that have allowed you to create
-        games in their names or the ones that you have pre registered
+        {{
+          "The players showed here are the ones that have allowed you to create games in their names or the ones that you have pre registered"
+            | translate
+        }}
       </div>
     </ng-template>
     <form [formGroup]="gameForm" class="addGame" (ngSubmit)="addGame()">
@@ -21,7 +23,9 @@
             [disabled]="player.displayName === gameForm.value.player2"
             >{{ player.displayName }}</nb-option
           >
-          <nb-option (click)="addNewPlayer()">NEW PLAYER</nb-option>
+          <nb-option (click)="addNewPlayer()">{{
+            "NEW PLAYER" | translate
+          }}</nb-option>
         </nb-select>
         <nb-select
           placeholder="{{ 'Player' | translate }} 2"
@@ -33,7 +37,9 @@
             [disabled]="player.displayName === gameForm.value.player1"
             >{{ player.displayName }}</nb-option
           >
-          <nb-option (click)="addNewPlayer()">NEW PLAYER</nb-option>
+          <nb-option (click)="addNewPlayer()">{{
+            "NEW PLAYER" | translate
+          }}</nb-option>
         </nb-select>
       </ng-container>
       <nb-select

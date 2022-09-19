@@ -1,25 +1,25 @@
 <nb-card>
-    <nb-card-header>Settings</nb-card-header>
-    <nb-card-body>
-        
-        <nb-accordion>
-            <nb-accordion-item>
-              <nb-accordion-item-header>
-                Show Games
-              </nb-accordion-item-header>
-              <nb-accordion-item-body>
-               <app-options></app-options>
-              </nb-accordion-item-body>
-            </nb-accordion-item>
-            <nb-accordion-item>
-                <nb-accordion-item-header>
-                    Can create games for you
-                </nb-accordion-item-header>
-                <nb-accordion-item-body>
-                    <app-permissions (permissionsChange)="updatedPermittedUsers = $event"></app-permissions>
-                </nb-accordion-item-body>
-              </nb-accordion-item>
-        </nb-accordion>
-
-    </nb-card-body>
+  <nb-card-header>{{ "Settings" | translate }}</nb-card-header>
+  <nb-card-body>
+    <nb-accordion>
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          {{ "Show Games" | translate }}
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <app-options></app-options>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          {{ "Can create games for you" | translate }}
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <app-permissions
+            (permissionsChange)="updatedPermittedUsers = $event"
+          ></app-permissions>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </nb-card-body>
 </nb-card>

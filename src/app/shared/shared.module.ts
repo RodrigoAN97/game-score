@@ -59,6 +59,7 @@ import { PermissionToCreatePipe } from './pipes/permission-to-create.pipe';
     NbAlertModule,
     NbAccordionModule,
     NbPopoverModule,
+    TranslateModule
   ],
   exports: [
     CommonModule,

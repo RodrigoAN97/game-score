@@ -5,13 +5,13 @@
     [checked]="gamesService.createdByFilter$ | async"
     status="basic"
   >
-    Created by me
+    {{ "Created by me" | translate }}
   </nb-checkbox>
   <nb-checkbox
     (checkedChange)="gamesService.colleaguesFilter$.next($event)"
     [checked]="gamesService.colleaguesFilter$ | async"
     status="basic"
   >
-    Colleagues
+    {{ "Colleagues" | translate }}
   </nb-checkbox>
 </div>

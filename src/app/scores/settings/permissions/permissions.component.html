@@ -1,7 +1,7 @@
 <ng-container *ngIf="authService.currentUser$ | async as currentUser">
   <nb-select
     multiple
-    placeholder="Select Users"
+    placeholder="{{ 'Select Users' | translate }}"
     (selectedChange)="changePermissions($event)"
     *ngIf="players$ | async as players"
     [selected]="currentUser.permittedUsers"
