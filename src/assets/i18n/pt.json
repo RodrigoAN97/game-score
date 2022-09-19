@@ -32,5 +32,12 @@
   "Show Games": "Mostar Jogos",
   "Can create games for you": "Podem criar jogos para você",
   "Select Users": "Selecionar Usuários",
-  "Alert": "Alerta"
+  "Alert": "Alerta",
+  "This email already has a created user": "Esse email já tem um usuário criado",
+  "No user logged in!": "Nenhum usuário está logado!",
+  "Are you sure to want to add this user?": "Tem certeza que quer adicionar esse usuário?",
+  "Are you sure you wat to delete this game?": "Tem certeza que quer excluir esse jogo?",
+  "Delete": "Deletar",
+  "No": "Não",
+  "Yes": "Sim"
 }

@@ -5,6 +5,7 @@ import {
   Input,
 } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-alert-dialog',
@@ -14,7 +15,7 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class AlertDialogComponent implements OnInit {
   constructor(private dialogRef: NbDialogRef<AlertDialogComponent>) {}
-  @Input() message!: string;
+  @Input() message!: Observable<string>;
 
   close() {
     this.dialogRef.close();

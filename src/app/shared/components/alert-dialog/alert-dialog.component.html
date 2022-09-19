@@ -1,7 +1,7 @@
 <nb-card>
   <nb-card-header>{{'Alert' | translate}}</nb-card-header>
   <nb-card-body>
-    {{ message }}
+    {{ message | async }}
   </nb-card-body>
   <nb-card-footer>
     <button nbButton status="warning" (click)="close()">Ok</button>

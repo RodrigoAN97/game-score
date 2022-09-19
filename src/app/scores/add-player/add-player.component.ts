@@ -2,11 +2,12 @@ import { FirestoreService } from '../../services/firestore.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uid } from 'uid';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { regexEmailPattern } from 'src/app/shared/regex';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-player',
@@ -20,7 +21,8 @@ export class AddPlayerComponent implements OnInit {
   constructor(
     private firestoreService: FirestoreService,
     private dialogService: NbDialogService,
-    private dialogRef: NbDialogRef<AddPlayerComponent>
+    private dialogRef: NbDialogRef<AddPlayerComponent>,
+    private translateService: TranslateService
   ) {
     this.playerForm = new FormGroup({
       displayName: new FormControl('', Validators.required),
@@ -42,7 +44,9 @@ export class AddPlayerComponent implements OnInit {
     const repeatedUser = await this.firestoreService.repeatedUser(email);
     if (repeatedUser) {
       this.dialogService.open(AlertDialogComponent, {
-        context: { message: 'This email already has a created user' },
+        context: {
+          message: this.getTranslation('This email already has a created user'),
+        },
       });
       return;
     }
@@ -50,8 +54,8 @@ export class AddPlayerComponent implements OnInit {
     const confirm = await lastValueFrom(
       this.dialogService.open(ConfirmDialogComponent, {
         context: {
-          title: 'Add',
-          message: `Are you sure to want to add ${displayName}?`,
+          title: this.getTranslation('Add'),
+          message: this.getTranslation('Are you sure to want to add this user?'),
         },
       }).onClose
     );
@@ -60,5 +64,9 @@ export class AddPlayerComponent implements OnInit {
       this.firestoreService.setDocument('users', docId, user);
       this.dialogRef.close();
     }
+  }
+
+  getTranslation(text: string): Observable<string> {
+    return this.translateService.get(text);
   }
 }

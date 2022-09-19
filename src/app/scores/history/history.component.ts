@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { IGame } from '../../shared/interfaces';
 import { GamesService } from 'src/app/services/games.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-read',
@@ -13,19 +14,22 @@ import { GamesService } from 'src/app/services/games.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryComponent implements OnInit {
-  games$: Observable<IGame[]> = this.gamesService.games$
+  games$: Observable<IGame[]> = this.gamesService.games$;
   constructor(
     private firestoreService: FirestoreService,
     private dialogService: NbDialogService,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private translateService: TranslateService
   ) {}
 
   async deleteGame(id: string) {
     const confirm = await lastValueFrom(
       this.dialogService.open(ConfirmDialogComponent, {
         context: {
-          title: 'Delete',
-          message: 'Are you sure you wat to delete this game?',
+          title: this.getTranslation('Delete'),
+          message: this.getTranslation(
+            'Are you sure you wat to delete this game?'
+          ),
         },
         closeOnBackdropClick: false,
       }).onClose
@@ -33,6 +37,10 @@ export class HistoryComponent implements OnInit {
     if (confirm) {
       this.firestoreService.deleteDocument('games', id);
     }
+  }
+
+  getTranslation(text: string): Observable<string> {
+    return this.translateService.get(text);
   }
 
   ngOnInit(): void {}

@@ -13,6 +13,7 @@ import { DBUser, IGame } from '../../shared/interfaces';
 import { AddPlayerComponent } from '../add-player/add-player.component';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 import { GamesService } from 'src/app/services/games.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create',
@@ -35,7 +36,8 @@ export class CreateComponent implements OnInit {
     private toastrService: NbToastrService,
     private authService: AuthService,
     private dialogService: NbDialogService,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private translateService: TranslateService
   ) {
     this.players$ = this.gamesService.players$;
   }
@@ -79,8 +81,12 @@ export class CreateComponent implements OnInit {
 
   alert(message: string) {
     this.dialogService.open(AlertDialogComponent, {
-      context: { message },
+      context: { message: this.getTranslation(message) },
     });
+  }
+
+  getTranslation(text: string): Observable<string> {
+    return this.translateService.get(text);
   }
 
   ngOnInit(): void {}
