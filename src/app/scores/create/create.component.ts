@@ -53,7 +53,7 @@ export class CreateComponent implements OnInit {
       return;
     }
 
-    const userUid = this.authService.userUid;
+    const userUid = this.authService.userUid$.value;
     if (!userUid) {
       this.alert('No user logged in!');
       return;

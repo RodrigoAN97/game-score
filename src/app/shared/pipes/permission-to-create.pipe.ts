@@ -9,7 +9,7 @@ export class PermissionToCreatePipe implements PipeTransform {
   constructor(private authService: AuthService) {}
 
   transform(players: DBUser[] | null): DBUser[] | undefined {
-    const userUid = this.authService.userUid as string;
+    const userUid = this.authService.userUid$.value;
     console.log({userUid});
     return players?.filter(
       (player) =>

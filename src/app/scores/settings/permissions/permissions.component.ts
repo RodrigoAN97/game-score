@@ -1,5 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { combineLatest, map, Observable } from 'rxjs';
 import { GamesService } from 'src/app/services/games.service';
 import { DBUser } from 'src/app/shared/interfaces';
 import { AuthService } from '../../../auth/auth.service';
@@ -12,21 +18,23 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class PermissionsComponent implements OnInit {
   players$: Observable<DBUser[]>;
-  userUid = this.authService.userUid as string;
   @Output() permissionsChange = new EventEmitter<string[]>();
 
   constructor(
     private gamesService: GamesService,
-    public authService: AuthService,
+    public authService: AuthService
   ) {
-    this.players$ = this.gamesService.players$.pipe(
-      map((players) => {
-        return players.filter((player) => player.uid !== this.userUid);
+    this.players$ = combineLatest([
+      this.gamesService.players$,
+      this.authService.userUid$,
+    ]).pipe(
+      map(([players, userUid]) => {
+        return players.filter((player) => player.uid !== userUid);
       })
     );
   }
 
-  changePermissions(users: string[]){
+  changePermissions(users: string[]) {
     this.permissionsChange.emit(users);
   }
 

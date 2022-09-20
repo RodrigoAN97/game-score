@@ -16,7 +16,6 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit, OnDestroy {
-  userUid = this.authService.userUid as string;
   updatedPermittedUsers!: string[];
   constructor(
     private firestoreService: FirestoreService,
@@ -33,7 +32,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   savePermissions() {
-    this.firestoreService.upsertDocument('users', this.userUid, {
+    const userUid = this.authService.userUid$.value;
+    this.firestoreService.upsertDocument('users', userUid, {
       permittedUsers: this.updatedPermittedUsers,
     });
   }

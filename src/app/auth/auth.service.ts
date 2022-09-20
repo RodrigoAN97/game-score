@@ -11,7 +11,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { onAuthStateChanged } from 'firebase/auth';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
 import { DBUser } from '../shared/interfaces';
 
@@ -26,15 +26,16 @@ google.setCustomParameters({
 })
 export class AuthService {
   auth = getAuth();
-  userUid: string | undefined;
+  userUid$: BehaviorSubject<string> = new BehaviorSubject('');
   currentUser$!: Observable<DBUser | null>;
   constructor(
     private router: Router,
     private firestoreService: FirestoreService
   ) {
     onAuthStateChanged(this.auth, (user) => {
-      this.userUid = user?.uid;
-      this.currentUser$ = this.firestoreService.getUser$(this.userUid);
+      console.log('USER CHANGED', {user});
+      this.userUid$.next(user?.uid as string);
+      this.currentUser$ = this.firestoreService.getUser$(user?.uid);
     });
   }
 

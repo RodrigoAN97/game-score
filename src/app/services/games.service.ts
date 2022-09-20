@@ -25,14 +25,14 @@ export class GamesService {
     private firestoreService: FirestoreService,
     private authService: AuthService
   ) {
-    const userUid = this.authService.auth.currentUser?.uid as string;
+    // const userUid = this.authService.auth.currentUser?.uid as string;
 
-    this.colleaguesList$ = (
-      this.firestoreService.getCollection('games') as Observable<IGame[]>
+    this.colleaguesList$ = combineLatest(
+      [this.initialGames$, authService.userUid$]
     ).pipe(
-      map((games) => {
+      map(([initialGames, userUid]) => {
         let col: string[] = [];
-        games.forEach((game) => {
+        initialGames.forEach((game) => {
           if (game.players.includes(userUid)) {
             const colPlayer = game.players.filter((p) => p !== userUid)[0];
             if (!col.includes(colPlayer)) {
@@ -49,9 +49,10 @@ export class GamesService {
       this.createdByFilter$,
       this.colleaguesFilter$,
       this.colleaguesList$,
+      this.authService.userUid$
     ]).pipe(
       map(
-        ([initialGames, createdByFilter, colleaguesFilter, colleaguesList]) => {
+        ([initialGames, createdByFilter, colleaguesFilter, colleaguesList, userUid]) => {
           const games = initialGames.filter((game) => {
             return (
               (createdByFilter && game.createdBy === userUid) ||
