@@ -23,7 +23,6 @@ export class FirestoreService {
   constructor(private firestore: Firestore) {}
 
   async setDocument(collectionName: string, docId: string, docData: any) {
-    this.read();
     const collectionRef = collection(this.firestore, collectionName);
     await setDoc(doc(collectionRef, docId), docData);
   }
@@ -49,18 +48,15 @@ export class FirestoreService {
   }
 
   async deleteDocument(collectionName: string, docId: string) {
-    this.read();
     await deleteDoc(doc(this.firestore, collectionName, docId));
   }
 
   getCollection(collectionName: string): Observable<any[]> {
-    this.read();
     const col = collection(this.firestore, collectionName);
     return collectionData(col);
   }
 
   async repeatedUser(email: string): Promise<boolean> {
-    this.read();
     const matchEmail = query(
       collection(this.firestore, 'users'),
       where('email', '==', email)
@@ -71,26 +67,17 @@ export class FirestoreService {
   }
 
   async getUser(userUid: string): Promise<DBUser> {
-    this.read();
     const docRef = doc(this.firestore, 'users', userUid);
     const docSnap = await getDoc(docRef);
     return docSnap.data() as DBUser;
   }
 
   getUser$(userUid: string | undefined): Observable<any> {
-    this.read();
     if (!userUid) {
       return of(undefined);
     }
     const docRef = doc(this.firestore, 'users', userUid);
     const userData = docData(docRef);
     return userData;
-  }
-
-  read() {
-    const key = 'firestore';
-    const previous = localStorage.getItem(key);
-    const newValue = previous ? Number(previous) + 1 : 1;
-    localStorage.setItem(key, newValue.toString());
   }
 }
