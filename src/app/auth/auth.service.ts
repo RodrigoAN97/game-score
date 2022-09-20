@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { onAuthStateChanged } from 'firebase/auth';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
@@ -28,9 +29,11 @@ export class AuthService {
   auth = getAuth();
   userUid$: BehaviorSubject<string> = new BehaviorSubject('');
   currentUser$!: Observable<DBUser | null>;
+  physicalPositions = NbGlobalPhysicalPosition;
   constructor(
     private router: Router,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private toastrService: NbToastrService
   ) {
     onAuthStateChanged(this.auth, (user) => {
       this.userUid$.next(user?.uid as string);
@@ -56,6 +59,10 @@ export class AuthService {
         const email = error.customData.email;
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.log('error', { errorCode, errorMessage, email, credential });
+        this.toastrService.show('Error', errorMessage, {
+          position: this.physicalPositions.TOP_RIGHT,
+          status: 'danger',
+        });
       });
   }
 
@@ -66,12 +73,14 @@ export class AuthService {
         const user = userCredential.user;
         this.saveUser({ ...user, displayName });
         this.router.navigate(['/']);
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        this.toastrService.show('Error', errorMessage, {
+          position: this.physicalPositions.TOP_RIGHT,
+          status: 'danger',
+        });
       });
   }
 
@@ -87,6 +96,10 @@ export class AuthService {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        this.toastrService.show('Error', errorMessage, {
+          position: this.physicalPositions.TOP_RIGHT,
+          status: 'danger',
+        });
       });
   }
 
@@ -96,7 +109,10 @@ export class AuthService {
         console.log('sign out successful');
       })
       .catch((error) => {
-        console.error(error);
+        this.toastrService.show('Error', error.message, {
+          position: this.physicalPositions.TOP_RIGHT,
+          status: 'danger',
+        });
       });
   }
 
@@ -105,8 +121,8 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
     };
-    if(user.displayName) newUser.displayName = user.displayName;
-    if(user.photoURL) newUser.photoURL = user.photoURL;
+    if (user.displayName) newUser.displayName = user.displayName;
+    if (user.photoURL) newUser.photoURL = user.photoURL;
 
     this.firestoreService.upsertDocument('users', user.uid, newUser);
   }
