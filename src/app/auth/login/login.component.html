@@ -77,7 +77,7 @@
           formControlName="password"
           placeholder="{{ 'Password' | translate }}"
           nbInput
-          (keydown.enter)="loginWithEmail()"
+          (keydown.enter)="loginForm.valid && loginWithEmail()"
         />
       </form>
     </nb-card-body>
