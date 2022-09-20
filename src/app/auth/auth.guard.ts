@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid;
-          console.log('logged in', user);
+          console.log('logged in');
           resolve(true);
         } else {
           console.log('user need to be logged in');

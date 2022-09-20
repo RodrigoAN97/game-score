@@ -33,7 +33,6 @@ export class AuthService {
     private firestoreService: FirestoreService
   ) {
     onAuthStateChanged(this.auth, (user) => {
-      console.log('USER CHANGED', {user});
       this.userUid$.next(user?.uid as string);
       this.currentUser$ = this.firestoreService.getUser$(user?.uid);
     });

@@ -66,7 +66,6 @@ export class CreateComponent implements OnInit {
       date: this.gameForm.value.date,
       createdBy: userUid,
     };
-    console.log({ docData });
     this.firestoreService.setDocument('games', docId, docData);
     this.toastrService.show('Success', 'Game was created successfully!', {
       position: this.physicalPositions.TOP_RIGHT,

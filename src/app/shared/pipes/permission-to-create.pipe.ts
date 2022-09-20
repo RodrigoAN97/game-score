@@ -10,7 +10,6 @@ export class PermissionToCreatePipe implements PipeTransform {
 
   transform(players: DBUser[] | null): DBUser[] | undefined {
     const userUid = this.authService.userUid$.value;
-    console.log({userUid});
     return players?.filter(
       (player) =>
         player.permittedUsers?.includes(userUid) || player.uid === userUid
