@@ -9,12 +9,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
+import { collection, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { onAuthStateChanged } from 'firebase/auth';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
 import { DBUser } from '../shared/interfaces';
+import { ConfirmPermissionsComponent } from './confirm-permissions/confirm-permissions.component';
 
 const google = new GoogleAuthProvider();
 google.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -32,8 +34,9 @@ export class AuthService {
   physicalPositions = NbGlobalPhysicalPosition;
   constructor(
     private router: Router,
+    private toastrService: NbToastrService,
     private firestoreService: FirestoreService,
-    private toastrService: NbToastrService
+    private dialogService: NbDialogService
   ) {
     onAuthStateChanged(this.auth, (user) => {
       this.userUid$.next(user?.uid as string);
@@ -116,7 +119,18 @@ export class AuthService {
       });
   }
 
-  saveUser(user: User) {
+  async saveUser(user: User) {
+    const dbUser = await this.firestoreService.getUserByEmail(user.email as string) as DBUser;
+    const confirmed = dbUser.confirmed;
+    if(!confirmed){
+      //TODO: pass whoCreated displayName and email to dialog and show it
+      //TODO: have actions after user clicks done
+      //TODO: deactivate closing dialog on clicking outside
+      const whoCreated = await this.firestoreService.getUser(dbUser.permittedUsers[0]);
+      this.dialogService.open(ConfirmPermissionsComponent)
+      return;
+    }
+
     const newUser: Partial<DBUser> = {
       uid: user.uid,
       email: user.email,
