@@ -56,14 +56,13 @@ export class FirestoreService {
     return collectionData(col);
   }
 
-  async repeatedUser(email: string): Promise<boolean> {
+  async getUserByEmail(email: string): Promise<any> {
     const matchEmail = query(
       collection(this.firestore, 'users'),
       where('email', '==', email)
     );
     const querySnapshot = await getDocs(matchEmail);
-
-    return !!querySnapshot.size;
+    return querySnapshot.docs[0]?.data();
   }
 
   async getUser(userUid: string): Promise<DBUser> {

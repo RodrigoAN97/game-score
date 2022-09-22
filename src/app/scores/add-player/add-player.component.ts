@@ -42,7 +42,7 @@ export class AddPlayerComponent implements OnInit {
     const email = this.playerForm.value.email;
     const user: Partial<DBUser> = { displayName, email, confirmed: false };
 
-    const repeatedUser = await this.firestoreService.repeatedUser(email);
+    const repeatedUser = !!(await this.firestoreService.getUserByEmail(email));
     if (repeatedUser) {
       this.dialogService.open(AlertDialogComponent, {
         context: {
