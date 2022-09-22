@@ -12,4 +12,5 @@ export interface DBUser {
   displayName: string | null;
   photoURL: string | null;
   permittedUsers: string[];
+  confirmed: boolean;
 }

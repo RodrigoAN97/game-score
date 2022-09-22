@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
 import { regexEmailPattern } from 'src/app/shared/regex';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { DBUser } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-add-player',
@@ -39,7 +40,7 @@ export class AddPlayerComponent implements OnInit {
     const docId = uid(21);
     const displayName = this.playerForm.value.displayName;
     const email = this.playerForm.value.email;
-    const user = { displayName, email };
+    const user: Partial<DBUser> = { displayName, email, confirmed: false };
 
     const repeatedUser = await this.firestoreService.repeatedUser(email);
     if (repeatedUser) {
@@ -55,7 +56,9 @@ export class AddPlayerComponent implements OnInit {
       this.dialogService.open(ConfirmDialogComponent, {
         context: {
           title: this.getTranslation('Add'),
-          message: this.getTranslation('Are you sure to want to add this user?'),
+          message: this.getTranslation(
+            'Are you sure to want to add this user?'
+          ),
         },
       }).onClose
     );
