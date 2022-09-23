@@ -48,6 +48,7 @@ export class AddPlayerComponent implements OnInit {
       email,
       permittedUsers: [currentUserUid],
       confirmed: false,
+      uid: docId
     };
 
     const repeatedUser = !!(await this.firestoreService.getUserByEmail(email));
