@@ -9,6 +9,7 @@ import { regexEmailPattern } from 'src/app/shared/regex';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DBUser } from 'src/app/shared/interfaces';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-add-player',
@@ -23,7 +24,8 @@ export class AddPlayerComponent implements OnInit {
     private firestoreService: FirestoreService,
     private dialogService: NbDialogService,
     private dialogRef: NbDialogRef<AddPlayerComponent>,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authService: AuthService
   ) {
     this.playerForm = new FormGroup({
       displayName: new FormControl('', Validators.required),
@@ -40,7 +42,13 @@ export class AddPlayerComponent implements OnInit {
     const docId = uid(21);
     const displayName = this.playerForm.value.displayName;
     const email = this.playerForm.value.email;
-    const user: Partial<DBUser> = { displayName, email, confirmed: false };
+    const currentUserUid = this.authService.userUid$.value;
+    const user: Partial<DBUser> = {
+      displayName,
+      email,
+      permittedUsers: [currentUserUid],
+      confirmed: false,
+    };
 
     const repeatedUser = !!(await this.firestoreService.getUserByEmail(email));
     if (repeatedUser) {
