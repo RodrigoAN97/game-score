@@ -9,6 +9,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
+import {
+  collection,
+  Firestore,
+  getDocs,
+  query,
+  where,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import {
   NbDialogService,
@@ -18,7 +25,7 @@ import {
 import { onAuthStateChanged } from 'firebase/auth';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
-import { DBUser } from '../shared/interfaces';
+import { DBUser, IGame } from '../shared/interfaces';
 import { ConfirmPermissionsComponent } from './confirm-permissions/confirm-permissions.component';
 
 const google = new GoogleAuthProvider();
@@ -39,7 +46,8 @@ export class AuthService {
     private router: Router,
     private toastrService: NbToastrService,
     private firestoreService: FirestoreService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private firestore: Firestore
   ) {
     onAuthStateChanged(this.auth, (user) => {
       this.userUid$.next(user?.uid as string);
@@ -128,24 +136,59 @@ export class AuthService {
     );
     const confirmed = currentUser?.confirmed;
     if (currentUser && confirmed === false) {
+      this.updateUserUid(currentUser);
       const whoCreated$ = this.firestoreService.getUser$(
         currentUser.permittedUsers[0]
       );
       this.dialogService.open(ConfirmPermissionsComponent, {
-        context: { whoCreated$, currentUser }, closeOnBackdropClick: false,
+        context: { whoCreated$, currentUser },
+        closeOnBackdropClick: false,
       });
       return;
     }
 
+    const newUser = this.userToSave(user);
+
+    currentUser
+      ? this.firestoreService.updateDocument('users', user.uid, newUser)
+      : this.firestoreService.setDocument('users', user.uid, newUser);
+  }
+
+  async updateUserUid(oldUser: DBUser) {
+    const newUser = getAuth().currentUser as User;
+    const matchUserGames = query(
+      collection(this.firestore, 'users'),
+      where('players', 'array-contains', oldUser.uid)
+    );
+    const querySnapshot = await getDocs(matchUserGames);
+
+    querySnapshot.forEach((doc) => {
+      const data = { ...doc.data() } as IGame;
+      data.players.map((player) => {
+        if (player === oldUser.uid) {
+          player = newUser.uid;
+        }
+        return player;
+      });
+      this.firestoreService.updateDocument('games', doc.id, data);
+    });
+
+    const newUserToSave = {...oldUser, uid: newUser.uid};
+    this.firestoreService.deleteDocument('users', oldUser.uid);
+    this.firestoreService.setDocument(
+      'users',
+      newUserToSave.uid as string,
+      newUserToSave
+    );
+  }
+
+  userToSave(user: User) {
     const newUser: Partial<DBUser> = {
       uid: user.uid,
       email: user.email,
     };
     if (user.displayName) newUser.displayName = user.displayName;
     if (user.photoURL) newUser.photoURL = user.photoURL;
-
-    currentUser
-      ? this.firestoreService.updateDocument('users', user.uid, newUser)
-      : this.firestoreService.setDocument('users', user.uid, newUser);
+    return newUser;
   }
 }
