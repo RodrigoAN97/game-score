@@ -26,14 +26,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
       if (this.updatedPermittedUsers) {
         this.savePermissions();
       }
-    })
+    });
   }
 
   ngOnInit(): void {}
 
   savePermissions() {
     const userUid = this.authService.userUid$.value;
-    this.firestoreService.upsertDocument('users', userUid, {
+    this.firestoreService.updateDocument('users', userUid, {
       permittedUsers: this.updatedPermittedUsers,
     });
   }

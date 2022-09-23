@@ -9,9 +9,12 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { collection, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { NbDialogService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import {
+  NbDialogService,
+  NbGlobalPhysicalPosition,
+  NbToastrService,
+} from '@nebular/theme';
 import { onAuthStateChanged } from 'firebase/auth';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
@@ -120,14 +123,18 @@ export class AuthService {
   }
 
   async saveUser(user: User) {
-    const dbUser = await this.firestoreService.getUserByEmail(user.email as string);
+    const dbUser = await this.firestoreService.getUserByEmail(
+      user.email as string
+    );
     const confirmed = dbUser?.confirmed;
-    if(dbUser && confirmed === false){
+    if (dbUser && confirmed === false) {
       //TODO: pass whoCreated displayName and email to dialog and show it
       //TODO: have actions after user clicks done
       //TODO: deactivate closing dialog on clicking outside
-      const whoCreated = await this.firestoreService.getUser(dbUser.permittedUsers[0]);
-      this.dialogService.open(ConfirmPermissionsComponent)
+      const whoCreated = await this.firestoreService.getUser(
+        dbUser.permittedUsers[0]
+      );
+      this.dialogService.open(ConfirmPermissionsComponent);
       return;
     }
 
@@ -138,6 +145,8 @@ export class AuthService {
     if (user.displayName) newUser.displayName = user.displayName;
     if (user.photoURL) newUser.photoURL = user.photoURL;
 
-    this.firestoreService.upsertDocument('users', user.uid, newUser);
+    dbUser
+      ? this.firestoreService.updateDocument('users', user.uid, newUser)
+      : this.firestoreService.setDocument('users', user.uid, newUser);
   }
 }

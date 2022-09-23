@@ -27,18 +27,9 @@ export class FirestoreService {
     await setDoc(doc(collectionRef, docId), docData);
   }
 
-  async upsertDocument(
-    collectionName: string,
-    docId: string,
-    data: any
-  ) {
+  async updateDocument(collectionName: string, docId: string, data: any) {
     const collectionRef = collection(this.firestore, collectionName);
-    const exists = await this.docExists(collectionName, docId);
-    if(exists) {
-      await updateDoc(doc(collectionRef, docId), data);
-    } else {
-      await this.setDocument(collectionName, docId, data);
-    }
+    await updateDoc(doc(collectionRef, docId), data);
   }
 
   async docExists(collectionName: string, docId: string) {
