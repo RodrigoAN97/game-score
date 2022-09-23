@@ -1,14 +1,20 @@
 <nb-card>
   <nb-card-header>There are games with you</nb-card-header>
-  <nb-card-body>
-    DisplayName (Email) has already created games with you aware of that? Do you
-    want to keep it?
+  <nb-card-body *ngIf="whoCreated$ | async as whoCreated">
+    {{ whoCreated.displayName }} ({{ whoCreated.email }}) has already created
+    games with you. Are you aware of that? Do you want to keep it?
   </nb-card-body>
   <nb-card-footer>
     <div id="checkPermissions">
-      <nb-checkbox>Keep permission for USER to create games for me</nb-checkbox>
-      <nb-checkbox>Keep all games USER has created for me</nb-checkbox>
+      <nb-checkbox (checkedChange)="keepPermission = $event" [checked]="keepPermission">
+        Keep permission for USER to create games for me
+      </nb-checkbox>
+      <nb-checkbox (checkedChange)="keepGames = $event" [checked]="keepGames">
+        Keep all games USER has created for me
+      </nb-checkbox>
     </div>
-    <div id="check"><button nbButton status="warning">Done</button></div>
+    <div id="check">
+      <button nbButton status="warning" (click)="confirm()">Done</button>
+    </div>
   </nb-card-footer>
 </nb-card>

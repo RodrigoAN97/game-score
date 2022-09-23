@@ -70,4 +70,17 @@ export class FirestoreService {
     const userData = docData(docRef);
     return userData;
   }
+
+  async deleteUserGames(user: DBUser) {
+    const q = query(
+      collection(this.firestore, 'games'),
+      where('players', 'array-contains', user.uid)
+    );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // console.log(doc.id, ' => ', doc.data());
+      this.deleteDocument('games', doc.id);
+    });
+  }
 }

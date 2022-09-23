@@ -123,18 +123,17 @@ export class AuthService {
   }
 
   async saveUser(user: User) {
-    const dbUser = await this.firestoreService.getUserByEmail(
+    const currentUser = await this.firestoreService.getUserByEmail(
       user.email as string
     );
-    const confirmed = dbUser?.confirmed;
-    if (dbUser && confirmed === false) {
-      //TODO: pass whoCreated displayName and email to dialog and show it
-      //TODO: have actions after user clicks done
-      //TODO: deactivate closing dialog on clicking outside
-      const whoCreated = await this.firestoreService.getUser(
-        dbUser.permittedUsers[0]
+    const confirmed = currentUser?.confirmed;
+    if (currentUser && confirmed === false) {
+      const whoCreated$ = this.firestoreService.getUser$(
+        currentUser.permittedUsers[0]
       );
-      this.dialogService.open(ConfirmPermissionsComponent);
+      this.dialogService.open(ConfirmPermissionsComponent, {
+        context: { whoCreated$, currentUser }, closeOnBackdropClick: false,
+      });
       return;
     }
 
@@ -145,7 +144,7 @@ export class AuthService {
     if (user.displayName) newUser.displayName = user.displayName;
     if (user.photoURL) newUser.photoURL = user.photoURL;
 
-    dbUser
+    currentUser
       ? this.firestoreService.updateDocument('users', user.uid, newUser)
       : this.firestoreService.setDocument('users', user.uid, newUser);
   }

@@ -39,5 +39,7 @@
   "Are you sure you wat to delete this game?": "Tem certeza que quer excluir esse jogo?",
   "Delete": "Deletar",
   "No": "Não",
-  "Yes": "Sim"
+  "Yes": "Sim",
+  "Are you sure? Deleting games is not reversible.": "Tem certeza? Deletar jogos não é reversível.",
+  "Are you sure?": "Tem certeza?"
 }
