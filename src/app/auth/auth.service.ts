@@ -120,9 +120,9 @@ export class AuthService {
   }
 
   async saveUser(user: User) {
-    const dbUser = await this.firestoreService.getUserByEmail(user.email as string) as DBUser;
-    const confirmed = dbUser.confirmed;
-    if(!confirmed){
+    const dbUser = await this.firestoreService.getUserByEmail(user.email as string);
+    const confirmed = dbUser?.confirmed;
+    if(dbUser && confirmed === false){
       //TODO: pass whoCreated displayName and email to dialog and show it
       //TODO: have actions after user clicks done
       //TODO: deactivate closing dialog on clicking outside

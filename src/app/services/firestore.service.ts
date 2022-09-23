@@ -56,13 +56,13 @@ export class FirestoreService {
     return collectionData(col);
   }
 
-  async getUserByEmail(email: string): Promise<any> {
+  async getUserByEmail(email: string): Promise<DBUser | undefined> {
     const matchEmail = query(
       collection(this.firestore, 'users'),
       where('email', '==', email)
     );
     const querySnapshot = await getDocs(matchEmail);
-    return querySnapshot.docs[0]?.data();
+    return querySnapshot.docs[0]?.data() as DBUser;
   }
 
   async getUser(userUid: string): Promise<DBUser> {
