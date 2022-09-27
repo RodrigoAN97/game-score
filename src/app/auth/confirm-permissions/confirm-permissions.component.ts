@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { DBUser } from 'src/app/shared/interfaces';
 
 @Component({
@@ -27,42 +28,50 @@ export class ConfirmPermissionsComponent implements OnInit {
     private dialogService: NbDialogService,
     private translateService: TranslateService,
     private firestoreService: FirestoreService,
-    private dialogRef: NbDialogRef<ConfirmPermissionsComponent>,
+    private dialogRef: NbDialogRef<ConfirmPermissionsComponent>
   ) {}
 
   async confirm() {
     const confirm = await lastValueFrom(
-      this.dialogService.open(AlertDialogComponent, {
+      this.dialogService.open(ConfirmDialogComponent, {
         context: {
           message: this.getTranslation(
             !this.keepGames
               ? 'Are you sure? Deleting games is not reversible.'
               : 'Are you sure?'
           ),
+          title: this.getTranslation('Confirm'),
         },
       }).onClose
     );
 
     let newUser = { ...this.currentUser };
-    if(this.keepGames && this.keepPermission){
+    if (this.keepGames && this.keepPermission) {
       this.dialogRef.close();
       return;
     }
 
     if (confirm) {
-      if(!this.keepGames){
-        this.deleteUserGames();
+      console.log('CONFIRMED');
+      if (!this.keepGames) {
+        console.log('DELETING GAMES');
+        await this.deleteUserGames();
       }
-      if(!this.keepPermission) {
+      if (!this.keepPermission) {
+        console.log('DELETING PERMISSION');
         newUser.permittedUsers = [];
       }
-      this.firestoreService.updateDocument('users', this.currentUser.uid, newUser);
+      await this.firestoreService.updateDocument(
+        'users',
+        this.currentUser.uid,
+        newUser
+      );
       this.dialogRef.close();
     }
   }
 
-  deleteUserGames() {
-    this.firestoreService.deleteUserGames(this.currentUser);
+  async deleteUserGames() {
+    await this.firestoreService.deleteUserGames(this.currentUser);
   }
 
   getTranslation(text: string): Observable<string> {

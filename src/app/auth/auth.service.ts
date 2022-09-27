@@ -136,7 +136,7 @@ export class AuthService {
     );
     const confirmed = currentUser?.confirmed;
     if (currentUser && confirmed === false) {
-      this.updateUserUid(currentUser);
+      await this.updateUserUid(currentUser);
       const whoCreated$ = this.firestoreService.getUser$(
         currentUser.permittedUsers[0]
       );
@@ -157,14 +157,16 @@ export class AuthService {
   async updateUserUid(oldUser: DBUser) {
     const newUser = getAuth().currentUser as User;
     const matchUserGames = query(
-      collection(this.firestore, 'users'),
+      collection(this.firestore, 'games'),
       where('players', 'array-contains', oldUser.uid)
     );
     const querySnapshot = await getDocs(matchUserGames);
+    console.log({newUser, matchUserGames, docs: querySnapshot.docs});
 
     querySnapshot.forEach((doc) => {
       const data = { ...doc.data() } as IGame;
-      data.players.map((player) => {
+      data.players = data.players.map((player) => {
+        console.log(player);
         if (player === oldUser.uid) {
           player = newUser.uid;
         }
@@ -173,7 +175,7 @@ export class AuthService {
       this.firestoreService.updateDocument('games', doc.id, data);
     });
 
-    const newUserToSave = {...oldUser, uid: newUser.uid};
+    const newUserToSave: DBUser = {...oldUser, uid: newUser.uid, confirmed: true};
     this.firestoreService.deleteDocument('users', oldUser.uid);
     this.firestoreService.setDocument(
       'users',
@@ -186,6 +188,7 @@ export class AuthService {
     const newUser: Partial<DBUser> = {
       uid: user.uid,
       email: user.email,
+      confirmed: true
     };
     if (user.displayName) newUser.displayName = user.displayName;
     if (user.photoURL) newUser.photoURL = user.photoURL;
