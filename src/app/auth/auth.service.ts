@@ -156,6 +156,14 @@ export class AuthService {
 
   async updateUserUid(oldUser: DBUser) {
     const newUser = getAuth().currentUser as User;
+    const newUserToSave: DBUser = {...oldUser, uid: newUser.uid, confirmed: true};
+    this.firestoreService.deleteDocument('users', oldUser.uid);
+    this.firestoreService.setDocument(
+      'users',
+      newUserToSave.uid as string,
+      {...newUserToSave, oldUid: oldUser.uid},
+    );
+
     const matchUserGames = query(
       collection(this.firestore, 'games'),
       where('players', 'array-contains', oldUser.uid)
@@ -174,14 +182,6 @@ export class AuthService {
       });
       this.firestoreService.updateDocument('games', doc.id, data);
     });
-
-    const newUserToSave: DBUser = {...oldUser, uid: newUser.uid, confirmed: true};
-    this.firestoreService.deleteDocument('users', oldUser.uid);
-    this.firestoreService.setDocument(
-      'users',
-      newUserToSave.uid as string,
-      newUserToSave
-    );
   }
 
   userToSave(user: User) {
