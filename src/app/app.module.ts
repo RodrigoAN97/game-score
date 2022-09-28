@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCG2eoTY6L4muRcqzucCV4S0-VzdEgeXjc',
@@ -29,7 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PrivacyPolicyComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
