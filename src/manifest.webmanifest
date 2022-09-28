@@ -1,6 +1,6 @@
 {
-  "name": "scores",
-  "short_name": "scores",
+  "name": "MyScores",
+  "short_name": "MyScores",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
