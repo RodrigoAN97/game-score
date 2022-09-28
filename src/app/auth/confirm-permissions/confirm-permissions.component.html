@@ -1,20 +1,30 @@
-<nb-card>
-  <nb-card-header>There are games with you</nb-card-header>
-  <nb-card-body *ngIf="whoCreated$ | async as whoCreated">
-    {{ whoCreated.displayName }} ({{ whoCreated.email }}) has already created
-    games with you. Are you aware of that? Do you want to keep it?
+<nb-card *ngIf="whoCreated$ | async as whoCreated">
+  <nb-card-header>{{ "There are games with you" | translate }}</nb-card-header>
+  <nb-card-body>
+    {{ whoCreated.displayName }} ({{ whoCreated.email }})
+    {{
+      "has already created games with you. Are you aware of that? Do you want to keep these games?"
+        | translate
+    }}
   </nb-card-body>
   <nb-card-footer>
     <div id="checkPermissions">
-      <nb-checkbox (checkedChange)="keepPermission = $event" [checked]="keepPermission">
-        Keep permission for USER to create games for me
+      <nb-checkbox
+        (checkedChange)="keepPermission = $event"
+        [checked]="keepPermission"
+      >
+        {{ "Keep permission for" | translate }} {{ whoCreated.displayName }}
+        {{ "to create games for me" | translate }}
       </nb-checkbox>
       <nb-checkbox (checkedChange)="keepGames = $event" [checked]="keepGames">
-        Keep all games USER has created for me
+        {{ "Keep all games" | translate }} {{ whoCreated.displayName }}
+        {{ "has created for me" | translate }}
       </nb-checkbox>
     </div>
     <div id="check">
-      <button nbButton status="warning" (click)="confirm()">Done</button>
+      <button nbButton status="warning" (click)="confirm()">
+        {{ "Confirm" | translate }}
+      </button>
     </div>
   </nb-card-footer>
 </nb-card>

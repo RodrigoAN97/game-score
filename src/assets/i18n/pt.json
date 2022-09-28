@@ -42,5 +42,11 @@
   "Yes": "Sim",
   "Are you sure? Deleting games is not reversible.": "Tem certeza? Deletar jogos não é reversível.",
   "Are you sure?": "Tem certeza?",
-  "Confirm": "Confirmar"
+  "Confirm": "Confirmar",
+  "There are games with you": "Já existem jogos com você",
+  "has already created games with you. Are you aware of that? Do you want to keep these games?": "já criou jogos com você. Você está ciente disso? Você quer manter esses jogos?",
+  "Keep permission for": "Manter permissão para",
+  "to create games for me": "criar jogos para mim",
+  "Keep all games": "Manter todos os jogos que",
+  "has created for me": "criou para mim"
 }
