@@ -9,6 +9,19 @@
     }
   }
 
+  #footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    #links {
+      b {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
   nb-layout-column {
     width: 100hw;
   }

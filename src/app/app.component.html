@@ -52,8 +52,12 @@
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-    {{ "Beat your opponent" | translate }}!
-    <b routerLink="/privacy-policy">Privacy Policy</b>
-    </nb-layout-footer
-  >
+    <div id="footer">
+      <div>{{ "Beat your opponent" | translate }}!</div>
+      <div id="links">
+        <b routerLink="/privacy-policy">Privacy Policy</b>
+        <b routerLink="/terms-conditions">Terms and Conditions</b>
+      </div>
+    </div>
+  </nb-layout-footer>
 </nb-layout>
